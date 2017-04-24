@@ -22,15 +22,22 @@ table =[]
 number_of_lines=0
 for line in file:
     i+=1
-    if i>8354: break
+    if i>8355: break
     words=re.split("\s+",line.strip())
     table.append(words)
     number_of_lines+=1
-    if words[0]!="data_": continue
-    if table[3][1]=="L-peptide" or table[3][1]=="L-PEPTIDE":
-        export_data(table)
+    if words[0][0:5]!="data_": continue
+    if i==3: 
+       for j in range(number_of_lines):
+           table.pop()
+       number_of_lines=0 
+       continue
+    if table[3][1][1:10]=="L-peptide" or table[3][1][1:10]=="L-PEPTIDE":
+        print(i)
+#        export_data(table)
     for j in range(number_of_lines):
         table.pop()
+    number_of_lines=0
         
     
     
