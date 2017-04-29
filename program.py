@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Apr 29 16:43:25 2017
+
+@author: barbara
+"""
+
 import re
 class vektor:
     x=0
@@ -56,16 +63,31 @@ class monomer:
             string+= (__self__.atoms[i].ID.ljust(4) + str(__self__.atoms[i].x).rjust(8) + str(__self__.atoms[i].y).rjust(8) + str(__self__.atoms[i].z).rjust(8) + '\n')
         return string
         
-### funkcja do napisania ###        
+### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
+def upload_data(table):
+    atoms_param=[]  #parametry kolejnych atomow
+    no_at=0  #number of atoms
+    for w1 in range (0,len(table)):
+        if table[w1][0]==table[1][1]:
+            if len(table[w1])>=12:
+                ID=table[w1][0]     # ID of monomer
+                atom_name=table[w1][2]    #ID of atom (specific only within one monomer)
+                pierwiastek=table[w1][3]  # name of the element 
+                x=float(table[w1][12])
+                y=float(table[w1][13])
+                z=float(table[w1][14])
+                atom_i = atom(x,y,z,atom_name) #obiekt klasy atom
+                no_at+=1
+                atoms_param.append(atom_i) #tablica zawierająca parametry atomow danego monomeru
+    monomer_i = monomer(ID, no_at, atoms_param) 
+    monomer_i.replicate()
+        
 #def export_data(table):
 file=open('Components-pub.cif')
 i=0
 table =[]
 number_of_lines=0
 for line in file:
-    
-    atoms_param=[]  #parametry kolejnych atomow
-    no_at=0
     
     i+=1
     if i>8355: break
@@ -80,24 +102,11 @@ for line in file:
        continue
     if table[3][1][1:10]=="L-peptide" or table[3][1][1:10]=="L-PEPTIDE":
         print(i)
-#basia - ma tworzyć obiekt klasy atom i z atomu obiekt klasy monomer; 
-
-        for w1 in range (40,len(table)):
-            if table[w1][0]==table[1][1]:
-                if len(table[w1])>=12:
-                    ID=table[w1][0]  
-                    atom_name=table[w1][2] 
-                    pierwiastek=table[w1][3] 
-                    x=table[w1][12]
-                    y=table[w1][13]
-                    z=table[w1][14]
-                    atom_i = atom(x,y,z,atom_name) #to powinien być obiekt klasy atom, ale nie wygląda jak powinien
-                    no_at+=1
-                    atoms_param.append(atom_i)
-        monomer_i = monomer(ID, no_at, atoms_param) #nie może go stworzyć, bo pa problem z atoms_param(bo chyba jest źle stworzony)
-        monomer_i.replicate()
-        print (monomer_i)
         
+# making monomer
+        upload_data(table)
+        print (monomer_i)
+
 #        export_data(table)
     for j in range(number_of_lines):
         table.pop()
