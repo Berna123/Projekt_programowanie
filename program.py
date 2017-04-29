@@ -81,6 +81,8 @@ def upload_data(table):
                 atoms_param.append(atom_i) #tablica zawierająca parametry atomow danego monomeru
     monomer_i = monomer(ID, no_at, atoms_param) 
     monomer_i.replicate()
+    print (monomer_i)
+
         
 #def export_data(table):
 file=open('Components-pub.cif')
@@ -105,7 +107,6 @@ for line in file:
         
 # making monomer
         upload_data(table)
-        print (monomer_i)
 
 #        export_data(table)
     for j in range(number_of_lines):
