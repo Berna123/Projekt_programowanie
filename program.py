@@ -69,9 +69,10 @@ class monomer:
 def upload_data(table):
     atoms_param=[]  #parametry kolejnych atomow
     no_at=0  #number of atoms
+    ID="?"
     for w1 in range (0,len(table)):
         if table[w1][0]==table[1][1]:
-            if len(table[w1])>=12:
+            if len(table[w1])>=12 and (table[w1][12]!="?" or table[w1][13]!="?" or table [w1][14]!="?" ) and (table[w1][12]!="charge") :
                 ID=table[w1][0]     # ID of monomer
                 atom_name=table[w1][2]    #ID of atom (specific only within one monomer)
                 pierwiastek=table[w1][3]  # name of the element 
@@ -83,11 +84,13 @@ def upload_data(table):
                 atoms_param.append(atom_i) #tablica zawierająca parametry atomow danego monomeru
     monomer_i = monomer(ID, no_at, atoms_param) 
     monomer_i.replicate()
-    print (monomer_i)
+    return monomer_i
+#    print (monomer_i)
 file=open('Components-pub.cif')
 i=0
 table =[]
 number_of_lines=0
+monomers_list=[]
 for line in file:  
     i+=1
 #    if i>8355: break
@@ -98,14 +101,16 @@ for line in file:
     if i==3: 
        table = [] 
        continue
-    for i in range(10):
-        if table[i][0]=="_chem_comp.type":
-            if table[i][1][1:10]=="L-peptide" or table[i][1][1:10]=="L-PEPTIDE":
-                print(i)
+    for j in range(10):
+        if table[j][0]=="_chem_comp.type":
+            if table[j][1][1:10]=="L-peptide" or table[j][1][1:10]=="L-PEPTIDE":
     # making monomer
-                upload_data(table)
+                monomer_i=upload_data(table)
+                monomers_list.append(monomer_i)
     table =[]
     number_of_lines=0
+for l in range (len(monomers_list)):
+    print (monomers_list[l])
         
     
     
