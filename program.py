@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Apr 29 16:43:25 2017
-
-@author: barbara
-"""
-
 import re
 class vektor:
     x=0
@@ -27,13 +20,13 @@ class atom:
     def scalar_prod(__self__,p):
         s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
         return s
-    def matrix_prod(__self__,m):
+    def rotate_prod(__self__,m):
         __self__.x=__self__.x*m[0][0]+__self__.y*m[1][0]+__self__.z*m[2][0]
         __self__.y=__self__.x*m[0][1]+__self__.y*m[1][1]+__self__.z*m[2][1]
         __self__.z=__self__.x*m[0][2]+__self__.y*m[1][2]+__self__.z*m[2][2]
     def translation(__self__,v):
-        __self__.x+=v.a
-        __self__.y+=v.b
+        __self__.x+=v.x
+        __self__.y+=v.y
         __self__.z+=v.z
     def vector_prod(__self__,p):
         w=vektor(0,0,0)
@@ -57,12 +50,21 @@ class monomer:
         for i in range (__self__.number_of_atoms):
             new_atoms.append(__self__.atoms[i])
         return monomer(__self__.ID,__self__.number_of_atoms, new_atoms)
+    def rotate_all(__self__,m):
+        for i in range(__self__.number_of_atoms):
+           __self__.atoms[i].x=__self__.atoms[i].x*m[0][0]+__self__.atoms[i].y*m[1][0]+__self__.atoms[i].z*m[2][0]
+           __self__.atoms[i].y=__self__.atoms[i].x*m[0][1]+__self__.atoms[i].y*m[1][1]+__self__.atoms[i].z*m[2][1]
+           __self__.atoms[i].z=__self__.atoms[i].x*m[0][2]+__self__.atoms[i].y*m[1][2]+__self__.atoms[i].z*m[2][2]
+    def translation_all(__self__, v):
+        for i in range(__self__.number_of_atoms):
+            __self__.atoms[i].x+=v.x
+            __self__.atoms[i].y+=v.y
+            __self__.atoms[i].z+=v.z
     def __str__(__self__):
         string="ID:  "+__self__.ID + "    Number of atoms:   " + str(__self__.number_of_atoms) + '\n'
         for i in range(__self__.number_of_atoms):
             string+= (__self__.atoms[i].ID.ljust(4) + str(__self__.atoms[i].x).rjust(8) + str(__self__.atoms[i].y).rjust(8) + str(__self__.atoms[i].z).rjust(8) + '\n')
-        return string
-        
+        return string       
 ### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
 def upload_data(table):
     atoms_param=[]  #parametry kolejnych atomow
@@ -82,35 +84,27 @@ def upload_data(table):
     monomer_i = monomer(ID, no_at, atoms_param) 
     monomer_i.replicate()
     print (monomer_i)
-
-        
-#def export_data(table):
 file=open('Components-pub.cif')
 i=0
 table =[]
 number_of_lines=0
-for line in file:
-    
+for line in file:  
     i+=1
-    if i>8355: break
+#    if i>8355: break
     words=re.split("\s+",line.strip())
     table.append(words)
     number_of_lines+=1
     if words[0][0:5]!="data_": continue
     if i==3: 
-       for j in range(number_of_lines):
-           table.pop()
-       number_of_lines=0 
+       table = [] 
        continue
-    if table[3][1][1:10]=="L-peptide" or table[3][1][1:10]=="L-PEPTIDE":
-        print(i)
-        
-# making monomer
-        upload_data(table)
-
-#        export_data(table)
-    for j in range(number_of_lines):
-        table.pop()
+    for i in range(10):
+        if table[i][0]=="_chem_comp.type":
+            if table[i][1][1:10]=="L-peptide" or table[i][1][1:10]=="L-PEPTIDE":
+                print(i)
+    # making monomer
+                upload_data(table)
+    table =[]
     number_of_lines=0
         
     
