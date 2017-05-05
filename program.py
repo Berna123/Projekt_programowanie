@@ -105,8 +105,9 @@ for line in file:
         if table[j][0]=="_chem_comp.type":
             if table[j][1][1:10]=="L-peptide" or table[j][1][1:10]=="L-PEPTIDE":
     # making monomer
-                monomer_i=upload_data(table)
-                monomers_list.append(monomer_i)
+               monomer_i=upload_data(table)
+               if monomer_i.ID!="?":
+                   monomers_list.append(monomer_i)
     table =[]
     number_of_lines=0
 for l in range (len(monomers_list)):
