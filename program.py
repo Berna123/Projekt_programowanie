@@ -97,6 +97,7 @@ def upload_data(table, basia, basia2):
     no_bonds=0
     bonds=[]
     znacznik=""
+    wazne_atomy=[]
     for w1 in range (0,len(table)):
         if table[w1][0]==table[1][1]:
             if len(table[w1])>=12 and (table[w1][12]!="?" or table[w1][13]!="?" or table [w1][14]!="?" ) and (table[w1][12]!="charge") :
@@ -116,7 +117,7 @@ def upload_data(table, basia, basia2):
             if len(table[w1])==7 and table[w1][6]==str(no_bonds+1):
                 bonds.append([table[w1][1], table[w1][2], table[w1][3] ])
                 no_bonds+=1
-    for w2 in range (0, len(bonds)):
+    for w2 in range (0, len(bonds)): 
        if ((bonds[w2][0]=="C" and ("O" in bonds[w2][1])) or (bonds[w2][1]=="C" and  ("O" in bonds[w2][0]))) and bonds[w2][2]=="SING":
 #           print (bonds[w2], ID)  # wiązanie C-Oh
            if ("O" in bonds[w2][0]): tlen=bonds[w2][0]
@@ -134,12 +135,17 @@ def upload_data(table, basia, basia2):
                    basia2.append(ID)
                    for w4 in range (0, len(atoms_param)):
                        if atoms_param[w4].ID==wodor:
-                           print (ID, atoms_param[w4])
-                       if atoms_param[w4].ID==tlen:
-                           print (ID, atoms_param[w4])
+#                           print (ID, atoms_param[w4])                         
+                           wazne_atomy.append(atoms_param[w4])
+                       if atoms_param[w4].ID==tlen:                         
+#                           print (ID, atoms_param[w4])
+                           wazne_atomy.append(atoms_param[w4])
                        if atoms_param[w4].ID==wegiel:
-                           print (ID, atoms_param[w4])
-
+#                           print (ID, atoms_param[w4])
+                           wazne_atomy.append(ID)
+                           wazne_atomy.append(atoms_param[w4])       
+    for w5 in range (0, len(wazne_atomy)):
+        print (wazne_atomy[w5])                       
 
 #           print (len(basia), len(basia2)) #basia - ilosc znalezionych wiązan raczej wegla karboksylowego z raczej tlenem 
                                          #basia2 - ilosc O-H przylaczonych do znalezionego wczesniej wegla
