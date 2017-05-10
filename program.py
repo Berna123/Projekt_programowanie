@@ -22,7 +22,7 @@ class atom:
     def scalar_prod(__self__,p):
         s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
         return s
-    def rotate_prod(__self__,m):
+    def rotate(__self__,m):
         __self__.x=__self__.x*m[0][0]+__self__.y*m[1][0]+__self__.z*m[2][0]
         __self__.y=__self__.x*m[0][1]+__self__.y*m[1][1]+__self__.z*m[2][1]
         __self__.z=__self__.x*m[0][2]+__self__.y*m[1][2]+__self__.z*m[2][2]
@@ -61,9 +61,12 @@ class monomer:
             __self__.atoms.append(atom(x,y,z,ID,element))
     def replicate(__self__):
         new_atoms=[]
+        new_bonds=[]
         for i in range (__self__.number_of_atoms):
             new_atoms.append(__self__.atoms[i])
-        return monomer(__self__.ID,__self__.number_of_atoms, new_atoms)
+        for i in range (__self__.number_of_bonds):
+            new_bonds.append(__self__.bonds[i])
+        return monomer(__self__.ID,__self__.number_of_atoms, new_atoms, __self__.number_of_bonds, new_bonds)
     def rotate_all(__self__,m):
         for i in range(__self__.number_of_atoms):
            __self__.atoms[i].x=__self__.atoms[i].x*m[0][0]+__self__.atoms[i].y*m[1][0]+__self__.atoms[i].z*m[2][0]
@@ -111,10 +114,10 @@ file=open('Components-pub.cif')
 i=0
 table =[]
 number_of_lines=0
-monomers_list=[] 
+monomers_list={}
 for line in file:  
     i+=1
-#    if i>8355: break
+    if i>8355: break
 #    if i>3785: break
     words=re.split("\s+",line.strip())
     table.append(words)
@@ -129,14 +132,9 @@ for line in file:
     # making monomer
                monomer_i=upload_data(table)
                if monomer_i.ID!="?":
-                   monomers_list.append(monomer_i)
+                   monomers_list[monomer_i.ID]=monomer_i
     table =[]
     number_of_lines=0
-for l in range (len(monomers_list)):
-    print (monomers_list[l])
+#for l in range (len(monomers_list)):
+#    print (monomers_list[l])
 
-
-
-        
-    
-    
