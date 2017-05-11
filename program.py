@@ -45,9 +45,11 @@ class monomer:
     number_of_atoms = 0
     number_of_bonds = 0
 #    atoms=[]
-    def __init__(__self__,ID,noa, atoms, nob, bonds):
+    def __init__(__self__,ID,noa, atoms, nob, bonds, wazne_atomy):
         __self__.atoms= []
         __self__.bonds= []
+        __self__.wazne_atomy=[]
+        __self__.wazne_atomy.append(wazne_atomy)
         for i in range (nob):
             __self__.bonds.append(bonds[i])
 #        print(len(__self__.atoms))
@@ -144,19 +146,20 @@ def upload_data(table, basia, basia2):
 #                           print (ID, atoms_param[w4])
                            wazne_atomy.append(ID)
                            wazne_atomy.append(atoms_param[w4])       
-    for w5 in range (0, len(wazne_atomy)):
-        print (wazne_atomy[w5])                       
+#    for w5 in range (0, len(wazne_atomy)):
+#        print (wazne_atomy[w5])                       
 
 #           print (len(basia), len(basia2)) #basia - ilosc znalezionych wiązan raczej wegla karboksylowego z raczej tlenem 
                                          #basia2 - ilosc O-H przylaczonych do znalezionego wczesniej wegla
 
 #    print(monomer(ID, no_at, atoms_param))
-    return  monomer(ID, no_at, atoms_param, no_bonds , bonds)
+    return  monomer(ID, no_at, atoms_param, no_bonds , bonds, wazne_atomy)
 file=open('Components-pub.cif')
 i=0
 table =[]
 number_of_lines=0
 monomers_list={}
+wazne_atomy_all={}
 spr=0
 basia=[]
 basia2=[]
@@ -180,6 +183,7 @@ for line in file:
                if monomer_i.ID!="?":
                    monomers_list[monomer_i.ID]=monomer_i
                    spr+=1
+                   wazne_atomy_all[monomer_i.ID]=monomer_i.wazne_atomy
                    
     table =[]
     number_of_lines=0
@@ -188,6 +192,8 @@ for line in file:
 
 #for key in monomers_list:
 #    print(monomers_list[key])
+
+print (wazne_atomy_all)
     
     
 print (spr)
