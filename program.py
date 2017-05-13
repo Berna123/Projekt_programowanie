@@ -1,5 +1,6 @@
 import re
-class vektor:
+import math
+class vector:
     x=0
     y=0
     z=0
@@ -7,6 +8,19 @@ class vektor:
         __self__.x=a
         __self__.y=b
         __self__.z=c
+    def leng (__self__):
+        return math.sqrt(__self__.x*__self__.x + __self__.y*__self__.y + __self__.z*__self__.z )
+    def vector_prod(__self__,p):
+        w=vector(0,0,0)
+        w.x=__self__.y*p.z-__self__.z*p.y
+        w.y=-__self__.x*p.z+__self__.z*p.x
+        w.z=__self__.x*p.y-__self__.y*p.x
+        return w
+    def scalar_prod(__self__,p):
+        s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
+        return s
+    def __str__(__self__):
+        return "[ "+str(__self__.x) + ", "+str(__self__.y) + ", "+str(__self__.y) + "]"
 class atom:
     x=0
     y=0
@@ -33,7 +47,7 @@ class atom:
         __self__.y+=v.y
         __self__.z+=v.z
     def vector_prod(__self__,p):
-        w=vektor(0,0,0)
+        w=vector(0,0,0)
         w.x=__self__.y*p.z-__self__.z*p.y
         w.y=-__self__.x*p.z+__self__.z*p.x
         w.z=__self__.x*p.y-__self__.y*p.x
@@ -49,7 +63,8 @@ class monomer:
         __self__.atoms= []
         __self__.bonds= []
         __self__.wazne_atomy=[]
-        __self__.wazne_atomy.append(wazne_atomy)
+        for i in range(len(wazne_atomy)):
+            __self__.wazne_atomy.append(wazne_atomy[i])
         for i in range (nob):
             __self__.bonds.append(bonds[i])
 #        print(len(__self__.atoms))
@@ -82,6 +97,33 @@ class monomer:
             __self__.atoms[i].x+=v.x
             __self__.atoms[i].y+=v.y
             __self__.atoms[i].z+=v.z
+    def system_C(__self__):
+        for i in range(5):
+            if __self__.wazne_atomy[i].znacznik=="Ckarb": C_karb=__self__.wazne_atomy[i]
+            if __self__.wazne_atomy[i].znacznik=="C_a": C_a=__self__.wazne_atomy[i]
+            if __self__.wazne_atomy[i].znacznik=="H": H=__self__.wazne_atomy[i]
+            if __self__.wazne_atomy[i].znacznik=="O_OH": O_OH=__self__.wazne_atomy[i]
+            if __self__.wazne_atomy[i].znacznik=="O=": O=__self__.wazne_atomy[i]
+        x=O_OH.x-C_karb.x
+        y=O_OH.y-C_karb.y
+        z=O_OH.z-C_karb.z
+        v_x=vector(x,y,z)
+        v_x.x=v_x.x/v_x.leng()
+        v_x.y=v_x.y/v_x.leng()
+        v_x.z=v_x.z/v_x.leng()
+        x=O.x-C_karb.x
+        y=O.y-C_karb.y
+        z=O.z-C_karb.z
+        v_CO=vector(x,y,z)
+        v_y=v_x.vector_prod(v_CO)
+        v_y.x=v_y.x/v_y.leng()
+        v_y.y=v_y.y/v_y.leng()
+        v_y.z=v_y.z/v_y.leng() 
+        v_z=v_x.vector_prod(v_y)
+        v_z.x=v_z.x/v_z.leng()
+        v_z.y=v_z.y/v_z.leng()
+        v_z.z=v_z.z/v_z.leng()
+        A=[[v_x.x, v_y.x, v_z.x],[v_x.y, v_y.y, v_z.y], [v_x.z, v_y.z, v_z.z]]
     def __str__(__self__):
         string="ID:  "+__self__.ID + "    Number of atoms:   " + str(__self__.number_of_atoms) + '\n'
         for i in range(__self__.number_of_atoms):       
@@ -141,26 +183,32 @@ def upload_data(table, l1, l2, l3, l4, l5):
                        
     for w4 in range (0, len(atoms_param)):
        if atoms_param[w4].ID==wodor:
-          print (ID, atoms_param[w4], "wodor")                         
+#          print (ID, atoms_param[w4], "wodor")  
+          atoms_param[w4].znacznik="H"
           wazne_atomy.append(atoms_param[w4])
           l1.append(1)
        if atoms_param[w4].ID==tlen:                         
-          print (ID, atoms_param[w4], "tlenOh")
+#          print (ID, atoms_param[w4], "tlenOh")
+          atoms_param[w4].znacznik="O_OH"
           wazne_atomy.append(atoms_param[w4])
           l2.append(1)
        if atoms_param[w4].ID==wegiel:
-          print (ID, atoms_param[w4])
-          wazne_atomy.append(ID)
+#          print (ID, atoms_param[w4])
           wazne_atomy.append(atoms_param[w4]) 
           l3.append(1)
-       if atoms_param[w4].ID==tlen_doub:                           
-          print (ID, atoms_param[w4], "tlen_doub")
+       if atoms_param[w4].ID==tlen_doub:
+          atoms_param[w4].znacznik="O="                           
+#          print (ID, atoms_param[w4], "tlen_doub")
           wazne_atomy.append(atoms_param[w4])
           l4.append(1)
        if atoms_param[w4].ID=="CA":
-          print (ID, atoms_param[w4], "CA")
+          atoms_param[w4].znacznik="C_a"
+          wazne_atomy.append(atoms_param[w4])
+#          print (ID, atoms_param[w4], "CA")
           l5.append(1)
-    print (len(l1), len(l2), len(l3), len(l4), len(l5))
+#    print(len(wazne_atomy))
+#    print (len(l1), len(l2), len(l3), len(l4), len(l5))
+    if len(wazne_atomy)!=5: ID="?"
     return  monomer(ID, no_at, atoms_param, no_bonds , bonds, wazne_atomy)
 
 file=open('Components-pub.cif')
@@ -176,7 +224,7 @@ l5=[]
 l6=0
 for line in file:  
     i+=1
-#    if i>21362: break
+    if i>21362: break
 #    if i>8355: break
 #    if i>3785: break
     words=re.split("\s+",line.strip())
@@ -194,12 +242,9 @@ for line in file:
                if monomer_i.ID!="?":
                    monomers_list[monomer_i.ID]=monomer_i
                    l6+=1
-                   print (l6)
+#                   print (l6)
                    
     table =[]
     number_of_lines=0
-#for l in range (len(monomers_list)):
-#    print (monomers_list[l])
-
-#for key in monomers_list:
-#    print(monomers_list[key])
+for key in monomers_list:
+    monomers_list[key].system_C()
