@@ -86,12 +86,15 @@ class monomer:
             new_atoms.append(__self__.atoms[i])
         for i in range (__self__.number_of_bonds):
             new_bonds.append(__self__.bonds[i])
-        return monomer(__self__.ID,__self__.number_of_atoms, new_atoms, __self__.number_of_bonds, new_bonds)
+        return monomer(__self__.ID,__self__.number_of_atoms, new_atoms, __self__.number_of_bonds, new_bonds, __self__.wazne_atomy)
     def rotate_all(__self__,m):
         for i in range(__self__.number_of_atoms):
-           __self__.atoms[i].x=__self__.atoms[i].x*m[0][0]+__self__.atoms[i].y*m[1][0]+__self__.atoms[i].z*m[2][0]
-           __self__.atoms[i].y=__self__.atoms[i].x*m[0][1]+__self__.atoms[i].y*m[1][1]+__self__.atoms[i].z*m[2][1]
-           __self__.atoms[i].z=__self__.atoms[i].x*m[0][2]+__self__.atoms[i].y*m[1][2]+__self__.atoms[i].z*m[2][2]
+           x=__self__.atoms[i].x
+           y=__self__.atoms[i].y
+           z=__self__.atoms[i].z
+           __self__.atoms[i].x=x*m[0][0]+y*m[0][1]+z*m[0][2]
+           __self__.atoms[i].y=x*m[1][0]+y*m[1][1]+z*m[1][2]
+           __self__.atoms[i].z=x*m[2][0]+y*m[2][1]+z*m[2][2]
     def translation_all(__self__, v):
         for i in range(__self__.number_of_atoms):
             __self__.atoms[i].x+=v.x
@@ -127,6 +130,55 @@ class monomer:
         v_z.y=v_z.y/a
         v_z.z=v_z.z/a
         A=[[v_x.x, v_y.x, v_z.x],[v_x.y, v_y.y, v_z.y], [v_x.z, v_y.z, v_z.z]]
+        return(A)
+#        print(A)
+    def system_N(__self__):
+        l=0
+        for i in range(8):
+            if __self__.wazne_atomy[i].znacznik=="C_a":
+                C_a=__self__.wazne_atomy[i]
+            if __self__.wazne_atomy[i].znacznik=="N": N=__self__.wazne_atomy[i]
+            if __self__.wazne_atomy[i].znacznik=="nH" and l==0:
+                H1=__self__.wazne_atomy[i]
+                __self__.wazne_atomy[i].znacznik="H1"
+                l=1
+            if __self__.wazne_atomy[i].znacznik=="nH" and l==1: 
+                H2=__self__.wazne_atomy[i]
+                __self__.wazne_atomy[i].znacznik="H2"
+        x=H1.x-N.x
+        y=H1.y-N.y
+        z=H1.z-N.z
+        v_x=vector(x,y,z)
+        a=v_x.leng()
+        v_x.x=v_x.x/a
+        v_x.y=v_x.y/a
+        v_x.z=v_x.z/a
+        x=H1.x-C_a.x
+        y=H1.y-C_a.y
+        z=H1.z-C_a.z
+        v_CH1=vector(x,y,z)
+        x=H2.x-C_a.x
+        y=H2.y-C_a.y
+        z=H2.z-C_a.z
+        v_CH2=vector(x,y,z)
+        v_y=v_CH1.vector_prod(v_CH2)
+        a=v_y.leng()
+        v_y.x=v_y.x/a
+        v_y.y=v_y.y/a
+        v_y.z=v_y.z/a
+        v_z=v_x.vector_prod(v_y)
+        a=v_z.leng()
+        v_z.x=v_z.x/a
+        v_z.y=v_z.y/a
+        v_z.z=v_z.z/a         
+        B=[[v_x.x, v_y.x, v_z.x],[v_x.y, v_y.y, v_z.y], [v_x.z, v_y.z, v_z.z]]
+        return(B)
+    def remove(__self__, ID):
+        for i in range(__self__.number_of_atoms):
+            if __self__.atoms[i].ID==ID:
+                __self__.atoms.pop(i)
+                __self__.number_of_atoms-=1
+                break
     def __str__(__self__):
         string="ID:  "+__self__.ID + "    Number of atoms:   " + str(__self__.number_of_atoms) + '\n'
         for i in range(__self__.number_of_atoms):       
@@ -137,6 +189,37 @@ class monomer:
             string+= ('%6s %6s %6s' %(__self__.bonds[i][0], __self__.bonds[i][1], __self__.bonds[i][2] ))+'\n'
         return string       
 ### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
+def transpose(m):
+    temp=[]
+    c1=[m[0][0],m[1][0],m[2][0]]
+    c2=[m[0][1],m[1][1],m[2][1]]
+    c3=[m[0][2],m[1][2],m[2][2]]
+    temp=[c1,c2,c3]
+    return temp
+def synthesize(monomer1, monomer2):
+    m1=monomer1.replicate()
+    m2=monomer2.replicate()
+    A=m1.system_C()
+    B=m2.system_N()
+    m2.rotate_all(transpose(B))
+    m2.rotate_all(A)
+    for i in range(m1.number_of_atoms):
+        if m1.atoms[i].znacznik=="Ckarb": m1_C_karb=m1.atoms[i]
+        if m1.atoms[i].znacznik=="O_OH": m1_OH=m1.atoms[i]
+        if m1.atoms[i].znacznik=="H": m1_H=m1.atoms[i]
+    for i in range(m2.number_of_atoms):
+        if m2.atoms[i].znacznik=="N": m2_N=m2.atoms[i]
+        if m2.atoms[i].znacznik=="C_a": m2_C_a=m2.atoms[i]
+    x=-m1_C_karb.x
+    y=-m1_C_karb.y
+    z=-m1_C_karb.z
+    v1=vector(x,y,z)
+    m1.translation_all(v1)
+    x=-m2_N.x
+    y=-m2_N.y
+    z=-m2_N.z
+    v2=vector(x,y,z)
+    m2.translation_all(v2) 
 def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
     atoms_param=[]  #parametry kolejnych atomow
     no_at=0  #number of atoms
@@ -218,21 +301,21 @@ def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
           wazne_atomy.append(atoms_param[w4])
 #          print (ID, atoms_param[w4])
           l5.append(1)
+    if len(wazne_atomy)!=5: ID="?"
+    for w4 in range (0, len(atoms_param)):
        if atoms_param[w4].ID==azot:
           atoms_param[w4].znacznik="N"
           wazne_atomy.append(atoms_param[w4])
-          print (ID, atoms_param[w4])
+#          print (ID, atoms_param[w4])
           l7.append(1)
        for w6 in range(0,len(amino_hydrogen)):
            if atoms_param[w4].ID==amino_hydrogen[w6]:
                atoms_param[w4].znacznik="nH"
                wazne_atomy.append(atoms_param[w4])
-               print (ID, atoms_param[w4])
+#               print (ID, atoms_param[w4])
                l8.append(1)
-      
-          
 #    print(len(wazne_atomy))
-    print (len(l1), len(l2), len(l3), len(l4), len(l5), len(l7), len(l8))
+#    print (len(l1), len(l2), len(l3), len(l4), len(l5), len(l7), len(l8))
     if len(wazne_atomy)!=8: ID="?"
     return  monomer(ID, no_at, atoms_param, no_bonds , bonds, wazne_atomy)
 
@@ -251,7 +334,7 @@ l7=[]
 l8=[]
 for line in file:  
     i+=1
-#    if i>21362: break
+    if i>21362: break
 #    if i>8355: break
 #    if i>3785: break
     words=re.split("\s+",line.strip())
@@ -273,5 +356,8 @@ for line in file:
                    
     table =[]
     number_of_lines=0
-for key in monomers_list:
-    monomers_list[key].system_C()
+#for key in monomers_list:
+#    monomers_list[key].system_C()
+#    monomers_list[key].system_N()
+#print(len(monomers_list))
+synthesize(monomers_list["C3Y"],monomers_list["C3Y"])
