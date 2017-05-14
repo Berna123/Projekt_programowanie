@@ -137,7 +137,7 @@ class monomer:
             string+= ('%6s %6s %6s' %(__self__.bonds[i][0], __self__.bonds[i][1], __self__.bonds[i][2] ))+'\n'
         return string       
 ### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
-def upload_data(table, l1, l2, l3, l4, l5):
+def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
     atoms_param=[]  #parametry kolejnych atomow
     no_at=0  #number of atoms
     ID="?"
@@ -149,6 +149,8 @@ def upload_data(table, l1, l2, l3, l4, l5):
     tlen="brak"
     wegiel="brak"
     tlen_doub="brak"
+    azot="brak"
+    amino_hydrogen=[]
     for w1 in range (0,len(table)):
         if table[w1][0]==table[1][1]:
             if len(table[w1])>=12 and (table[w1][12]!="?" or table[w1][13]!="?" or table [w1][14]!="?" ) and (table[w1][12]!="charge") :
@@ -183,35 +185,55 @@ def upload_data(table, l1, l2, l3, l4, l5):
                if (bonds[w3][2]=="DOUB" and (bonds[w3][0]==wegiel or bonds[w3][1]==wegiel)):
                    if ("O" in bonds[w3][0]): tlen_doub=bonds[w3][0]
                    else: tlen_doub=bonds[w3][1]
-                       
+       if (bonds[w2][0]=="CA" and ("N" in bonds[w2][1])) or (bonds[w2][1]=="CA" and ("N" in bonds[w2][0])): 
+           if "N" in bonds[w2][1]: azot=bonds[w2][1] 
+           else: azot=bonds[w2][0]
+           for w5 in range (0, len(bonds)):
+               if (bonds[w5][0]==azot and ("H" in bonds[w5][1])) or (bonds[w5][1]==azot and ("H" in bonds[w5][0])):
+                   if "H" in bonds[w5][0]: amino_hydrogen.append(bonds[w5][0])
+                   else: amino_hydrogen.append(bonds[w5][1])       
+                           
     for w4 in range (0, len(atoms_param)):
        if atoms_param[w4].ID==wodor:
-#          print (ID, atoms_param[w4], "wodor")  
           atoms_param[w4].znacznik="H"
           wazne_atomy.append(atoms_param[w4])
+#          print (ID, atoms_param[w4])           
           l1.append(1)
        if atoms_param[w4].ID==tlen:                         
-#          print (ID, atoms_param[w4], "tlenOh")
           atoms_param[w4].znacznik="O_OH"
           wazne_atomy.append(atoms_param[w4])
+#          print (ID, atoms_param[w4])          
           l2.append(1)
        if atoms_param[w4].ID==wegiel:
-#          print (ID, atoms_param[w4])
           wazne_atomy.append(atoms_param[w4]) 
+#          print (ID, atoms_param[w4])
           l3.append(1)
        if atoms_param[w4].ID==tlen_doub:
           atoms_param[w4].znacznik="O="                           
-#          print (ID, atoms_param[w4], "tlen_doub")
           wazne_atomy.append(atoms_param[w4])
+#          print (ID, atoms_param[w4])
           l4.append(1)
        if atoms_param[w4].ID=="CA":
           atoms_param[w4].znacznik="C_a"
           wazne_atomy.append(atoms_param[w4])
-#          print (ID, atoms_param[w4], "CA")
+#          print (ID, atoms_param[w4])
           l5.append(1)
+       if atoms_param[w4].ID==azot:
+          atoms_param[w4].znacznik="N"
+          wazne_atomy.append(atoms_param[w4])
+          print (ID, atoms_param[w4])
+          l7.append(1)
+       for w6 in range(0,len(amino_hydrogen)):
+           if atoms_param[w4].ID==amino_hydrogen[w6]:
+               atoms_param[w4].znacznik="nH"
+               wazne_atomy.append(atoms_param[w4])
+               print (ID, atoms_param[w4])
+               l8.append(1)
+      
+          
 #    print(len(wazne_atomy))
-#    print (len(l1), len(l2), len(l3), len(l4), len(l5))
-    if len(wazne_atomy)!=5: ID="?"
+    print (len(l1), len(l2), len(l3), len(l4), len(l5), len(l7), len(l8))
+    if len(wazne_atomy)!=8: ID="?"
     return  monomer(ID, no_at, atoms_param, no_bonds , bonds, wazne_atomy)
 
 file=open('Components-pub.cif')
@@ -225,9 +247,11 @@ l3=[]
 l4=[]
 l5=[]
 l6=0
+l7=[]
+l8=[]
 for line in file:  
     i+=1
-    if i>21362: break
+#    if i>21362: break
 #    if i>8355: break
 #    if i>3785: break
     words=re.split("\s+",line.strip())
@@ -241,7 +265,7 @@ for line in file:
         if table[j][0]=="_chem_comp.type":
             if table[j][1][1:10]=="L-peptide" or table[j][1][1:10]=="L-PEPTIDE":
     # making monomer
-               monomer_i=upload_data(table, l1, l2, l3, l4, l5)
+               monomer_i=upload_data(table, l1, l2, l3, l4, l5, l7, l8)
                if monomer_i.ID!="?":
                    monomers_list[monomer_i.ID]=monomer_i
                    l6+=1
