@@ -142,9 +142,12 @@ class monomer:
                 H1=__self__.wazne_atomy[i]
                 __self__.wazne_atomy[i].znacznik="H1"
                 l=1
+                H1_ID=__self__.wazne_atomy[i].ID
             if __self__.wazne_atomy[i].znacznik=="nH" and l==1: 
                 H2=__self__.wazne_atomy[i]
                 __self__.wazne_atomy[i].znacznik="H2"
+        for i in range(__self__.number_of_atoms):
+            if __self__.atoms[i].ID==H1_ID : __self__.atoms[i].znacznik="H1"
         x=H1.x-N.x
         y=H1.y-N.y
         z=H1.z-N.z
@@ -187,7 +190,52 @@ class monomer:
         string+="Number of bonds:  " + str(__self__.number_of_bonds)+ '\n'
         for i in range(__self__.number_of_bonds):
             string+= ('%6s %6s %6s' %(__self__.bonds[i][0], __self__.bonds[i][1], __self__.bonds[i][2] ))+'\n'
-        return string       
+        return string
+class peptide:
+    coord=[]
+    def synthesize(__self__,monomer1, monomer2):
+        m1=monomer1.replicate()
+        m2=monomer2.replicate()
+        A=m1.system_C()
+        B=m2.system_N()
+        m2.rotate_all(transpose(B))
+        m2.rotate_all(A)
+        for i in range(m1.number_of_atoms):
+            if m1.atoms[i].znacznik=="Ckarb": m1_C_karb=m1.atoms[i]
+            if m1.atoms[i].znacznik=="O_OH": 
+                m1_OH=m1.atoms[i]
+                m1_OH_ID=m1.atoms[i].ID
+            if m1.atoms[i].znacznik=="H": m1_H_ID=m1.atoms[i].ID
+        for i in range(m2.number_of_atoms):
+            if m2.atoms[i].znacznik=="N": m2_N=m2.atoms[i]
+            if m2.atoms[i].znacznik=="C_a": m2_C_a=m2.atoms[i]
+            if m2.atoms[i].znacznik=="H1": m2_H1_ID=m2.atoms[i].ID
+        x=-m1_C_karb.x
+        y=-m1_C_karb.y
+        z=-m1_C_karb.z
+        v1=vector(x,y,z)
+        m1.translation_all(v1)
+        x=-m2_N.x
+        y=-m2_N.y
+        z=-m2_N.z
+        v2=vector(x,y,z)
+        m2.translation_all(v2)
+        m2
+        A=m2.system_C()
+        m1.remove(m1_H_ID)
+        m1.remove(m1_OH_ID)
+        m2.remove(m2_H1_ID)
+        m1_table=[m1.ID, 1 , m1.atoms]
+        __self__.coord.append(m1_table)
+        m2_table=[m2.ID, 1 , m2.atoms]
+        __self__.coord.append(m2_table)
+    def __str__(__self__):
+        string=""
+        for i in range(len(__self__.coord)):
+            for j in range(len(__self__.coord[i][2])):
+                string+=('%3s  %7.4f  %7.4f  %7.4f' %(__self__.coord[i][2][j].element,__self__.coord[i][2][j].x,__self__.coord[i][2][j].y,__self__.coord[i][2][j].z))
+                string+='\n'
+        return string
 ### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
 def transpose(m):
     temp=[]
@@ -195,31 +243,7 @@ def transpose(m):
     c2=[m[0][1],m[1][1],m[2][1]]
     c3=[m[0][2],m[1][2],m[2][2]]
     temp=[c1,c2,c3]
-    return temp
-def synthesize(monomer1, monomer2):
-    m1=monomer1.replicate()
-    m2=monomer2.replicate()
-    A=m1.system_C()
-    B=m2.system_N()
-    m2.rotate_all(transpose(B))
-    m2.rotate_all(A)
-    for i in range(m1.number_of_atoms):
-        if m1.atoms[i].znacznik=="Ckarb": m1_C_karb=m1.atoms[i]
-        if m1.atoms[i].znacznik=="O_OH": m1_OH=m1.atoms[i]
-        if m1.atoms[i].znacznik=="H": m1_H=m1.atoms[i]
-    for i in range(m2.number_of_atoms):
-        if m2.atoms[i].znacznik=="N": m2_N=m2.atoms[i]
-        if m2.atoms[i].znacznik=="C_a": m2_C_a=m2.atoms[i]
-    x=-m1_C_karb.x
-    y=-m1_C_karb.y
-    z=-m1_C_karb.z
-    v1=vector(x,y,z)
-    m1.translation_all(v1)
-    x=-m2_N.x
-    y=-m2_N.y
-    z=-m2_N.z
-    v2=vector(x,y,z)
-    m2.translation_all(v2) 
+    return temp 
 def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
     atoms_param=[]  #parametry kolejnych atomow
     no_at=0  #number of atoms
@@ -360,4 +384,6 @@ for line in file:
 #    monomers_list[key].system_C()
 #    monomers_list[key].system_N()
 #print(len(monomers_list))
-synthesize(monomers_list["C3Y"],monomers_list["C3Y"])
+aa=peptide()
+aa.synthesize(monomers_list["C3Y"], monomers_list["C3Y"])
+print(aa)
