@@ -251,7 +251,7 @@ class peptide:
         m2.remove(m2_H1_ID)
         m1_table=[m1.ID, 1 , m1.atoms]
         __self__.coord.append(m1_table)
-        m2_table=[m2.ID, 1 , m2.atoms]
+        m2_table=[m2.ID, 2 , m2.atoms]
         __self__.coord.append(m2_table)
         b1=vector(m1_C_karb.x-m1_C_a.x, m1_C_karb.y-m1_C_a.y, m1_C_karb.z-m1_C_a.z)
         b2=vector(m2_N.x-m1_C_karb.x, m2_N.y-m1_C_karb.y, m2_N.z-m1_C_karb.z) 
@@ -271,45 +271,44 @@ class peptide:
         for i in range(m3.number_of_atoms):
             if m3.atoms[i].znacznik=="N": m3_N=m3.atoms[i]
             if m3.atoms[i].znacznik=="C_a": m3_C_a=m3.atoms[i]
-#        x=-m1_C_karb.x
-#        y=-m1_C_karb.y
-#        z=-m1_C_karb.z
-#        v1=vector(x,y,z)
-#        for i in range(lp):
-#            for j in range(len(__self__.coord[i][2])):
-#                __self__.coord[i][2][j].translation(v1)
+            if m3.atoms[i].znacznik=="Ckarb": m3_C_karb=m3.atoms[i]
         x=-m3_N.x
         y=-m3_N.y
         z=-m3_N.z
         v2=vector(x,y,z)
         m3.translation_all(v2)
         B=m3.system_N()
-#        print(__self__.A)
-#        print(B)
-#        m3.rotate_all(transpose(B))
-#        m3.rotate_all(__self__.A)
+        m3.rotate_all(transpose(B))
+        m3.rotate_all(__self__.A)
         x=m1_OH.x
         y=m1_OH.y
         z=m1_OH.z
-#        v3=vector(x,y,z)
-#        a=v3.leng()
-#        v3.x=v3.x/a*1.4
-#        v3.y=v3.y/a*1.4
-#        v3.z=v3.z/a*1.4
-#        m3.translation_all(v3)
+        v3=vector(x,y,z)
+        a=v3.leng()
+        v3.x=v3.x/a*1.4
+        v3.y=v3.y/a*1.4
+        v3.z=v3.z/a*1.4
+        m3.translation_all(v3)
         for i in range(m3.number_of_atoms):
             if m3.atoms[i].znacznik=="H1": m3_H1_ID=m3.atoms[i].ID
-#        __self__.A=m3.system_C()
+        __self__.A=m3.system_C()
         __self__.coord[lp-1][2].pop(licznik_OH)
         for i in range(len(__self__.coord[lp-1][2])):
             if __self__.coord[lp-1][2][i].znacznik=="H": licznik_H=i
         __self__.coord[lp-1][2].pop(licznik_H)
-#        m3.remove(m3_H1_ID)
+        m3.remove(m3_H1_ID)
         licznik_monomerow=1
         for i in range(lp):
             if __self__.coord[i][0]==m3.ID: licznik_monomerow+=1
         m3_table=[m3.ID, licznik_monomerow , m3.atoms]
         __self__.coord.append(m3_table)
+        x=-m3_C_karb.x
+        y=-m3_C_karb.y
+        z=-m3_C_karb.z
+        v4=vector(x,y,z)
+        for i in range(len(__self__.coord)):
+            for j in range(len(__self__.coord[i][2])):
+                __self__.coord[i][2][j].translation(v4)
          
     def __str__(__self__):
         string=""
@@ -478,7 +477,10 @@ for line in file:
 #print(len(monomers_list))
 aa=peptide()
 aa.synthesize(monomers_list["ALA"], monomers_list["ALA"])
-#aa.add(monomers_list["ALA"])
+aa.add(monomers_list["ALA"])
+aa.add(monomers_list["ALA"])
+aa.add(monomers_list["ALA"])
+aa.add(monomers_list["ALA"])
 print(aa)
 
 f=open('output.pdb', 'w')
