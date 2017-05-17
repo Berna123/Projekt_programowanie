@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed May 17 22:54:53 2017
+
+@author: barbara
+"""
 import re
 import math
 class vector:
@@ -423,6 +429,12 @@ def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
     if len(wazne_atomy)!=8: ID="?"
     return  monomer(ID, no_at, atoms_param, no_bonds , bonds, wazne_atomy)
 
+def make_output(peptyd, i, j, n):
+    string=""
+    string+=('%5s %5d %-7s %-7s %8.3f %8.3f %8.3f %3s' %("ATOM ", n, peptyd.coord[i][2][j-1].ID, peptyd.coord[i][0], peptyd.coord[i][2][j-1].x, peptyd.coord[i][2][j-1].y, peptyd.coord[i][2][j-1].z, peptyd.coord[i][2][j-1].element))
+    string+='\n'
+    f.write(string)
+
 file=open('new.cif')
 i=0
 table =[]
@@ -468,3 +480,13 @@ aa=peptide()
 aa.synthesize(monomers_list["ALA"], monomers_list["ALA"])
 #aa.add(monomers_list["ALA"])
 print(aa)
+
+f=open('output.pdb', 'w')
+i=0
+j=0
+n=0
+for w7 in range (len(aa.coord)):
+    for w8 in range (len(aa.coord[w7][2])):
+        n+=1
+        make_output(aa, w7, w8, n)
+        
