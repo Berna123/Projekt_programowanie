@@ -20,7 +20,7 @@ class vector:
         s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
         return s
     def __str__(__self__):
-        return "[ "+str(__self__.x) + ", "+str(__self__.y) + ", "+str(__self__.y) + "]"
+        return "[ "+str(__self__.x) + ", "+str(__self__.y) + ", "+str(__self__.z) + "]"
 class atom:
     x=0
     y=0
@@ -101,12 +101,12 @@ class monomer:
             __self__.atoms[i].y+=v.y
             __self__.atoms[i].z+=v.z
     def system_C(__self__):
-        for i in range(5):
-            if __self__.wazne_atomy[i].znacznik=="Ckarb": C_karb=__self__.wazne_atomy[i]
-            if __self__.wazne_atomy[i].znacznik=="C_a": C_a=__self__.wazne_atomy[i]
-            if __self__.wazne_atomy[i].znacznik=="H": H=__self__.wazne_atomy[i]
-            if __self__.wazne_atomy[i].znacznik=="O_OH": O_OH=__self__.wazne_atomy[i]
-            if __self__.wazne_atomy[i].znacznik=="O=": O=__self__.wazne_atomy[i]
+        for i in range(len(__self__.atoms)):
+            if __self__.atoms[i].znacznik=="Ckarb": C_karb=__self__.atoms[i]
+            if __self__.atoms[i].znacznik=="C_a": C_a=__self__.atoms[i]
+            if __self__.atoms[i].znacznik=="H": H=__self__.atoms[i]
+            if __self__.atoms[i].znacznik=="O_OH": O_OH=__self__.atoms[i]
+            if __self__.atoms[i].znacznik=="O=": O=__self__.atoms[i]
         x=O_OH.x-C_karb.x
         y=O_OH.y-C_karb.y
         z=O_OH.z-C_karb.z
@@ -134,23 +134,23 @@ class monomer:
 #        print(A)
     def system_N(__self__):
         l=0
-        for i in range(8):
-            if __self__.wazne_atomy[i].znacznik=="C_a":
-                C_a=__self__.wazne_atomy[i]
-            if __self__.wazne_atomy[i].znacznik=="N": N=__self__.wazne_atomy[i]
-            if __self__.wazne_atomy[i].znacznik=="nH" and l==0:
-                H1=__self__.wazne_atomy[i]
-                __self__.wazne_atomy[i].znacznik="H1"
-                l=1
-                H1_ID=__self__.wazne_atomy[i].ID
-            if __self__.wazne_atomy[i].znacznik=="nH" and l==1: 
-                H2=__self__.wazne_atomy[i]
-                __self__.wazne_atomy[i].znacznik="H2"
         for i in range(__self__.number_of_atoms):
-            if __self__.atoms[i].ID==H1_ID : __self__.atoms[i].znacznik="H1"
-        x=H1.x-N.x
-        y=H1.y-N.y
-        z=H1.z-N.z
+            if __self__.atoms[i].znacznik=="C_a":
+                C_a=__self__.atoms[i]
+            if __self__.atoms[i].znacznik=="N": N=__self__.atoms[i]
+            if __self__.atoms[i].znacznik=="nH" and l==0:
+                H1=__self__.atoms[i]
+                __self__.atoms[i].znacznik="H1"
+                l=1
+#                H1_ID=__self__.wazne_atomy[i].ID
+            if __self__.atoms[i].znacznik=="nH" and l==1: 
+                H2=__self__.atoms[i]
+                __self__.atoms[i].znacznik="H2"
+#        for i in range(__self__.number_of_atoms):
+#            if __self__.atoms[i].ID==H1_ID : __self__.atoms[i].znacznik="H1"
+        x=-H1.x+N.x
+        y=-H1.y+N.y
+        z=-H1.z+N.z
         v_x=vector(x,y,z)
         a=v_x.leng()
         v_x.x=v_x.x/a
@@ -193,15 +193,13 @@ class monomer:
         return string
 class peptide:
     coord=[]
+    A=[]
     def synthesize(__self__,monomer1, monomer2):
         m1=monomer1.replicate()
         m2=monomer2.replicate()
-        A=m1.system_C()
-        B=m2.system_N()
-        m2.rotate_all(transpose(B))
-        m2.rotate_all(A)
         for i in range(m1.number_of_atoms):
             if m1.atoms[i].znacznik=="Ckarb": m1_C_karb=m1.atoms[i]
+            if m1.atoms[i].znacznik=="C_a": m1_C_a=m1.atoms[i]
             if m1.atoms[i].znacznik=="O_OH": 
                 m1_OH=m1.atoms[i]
                 m1_OH_ID=m1.atoms[i].ID
@@ -209,19 +207,39 @@ class peptide:
         for i in range(m2.number_of_atoms):
             if m2.atoms[i].znacznik=="N": m2_N=m2.atoms[i]
             if m2.atoms[i].znacznik=="C_a": m2_C_a=m2.atoms[i]
-            if m2.atoms[i].znacznik=="H1": m2_H1_ID=m2.atoms[i].ID
+            if m2.atoms[i].znacznik=="Ckarb": m2_C_karb=m2.atoms[i]
         x=-m1_C_karb.x
         y=-m1_C_karb.y
         z=-m1_C_karb.z
         v1=vector(x,y,z)
         m1.translation_all(v1)
+        __self__.A=m1.system_C()
         x=-m2_N.x
         y=-m2_N.y
         z=-m2_N.z
         v2=vector(x,y,z)
         m2.translation_all(v2)
-        m2
-        A=m2.system_C()
+        B=m2.system_N()
+        m2.rotate_all(transpose(B))
+        m2.rotate_all(__self__.A)
+        x=m1_OH.x
+        y=m1_OH.y
+        z=m1_OH.z
+        v3=vector(x,y,z)
+        a=v3.leng()
+        v3.x=v3.x/a*1.4
+        v3.y=v3.y/a*1.4
+        v3.z=v3.z/a*1.4
+        m2.translation_all(v3)
+        x=-m2_C_karb.x
+        y=-m2_C_karb.y
+        z=-m2_C_karb.z
+        v4=vector(x,y,z)
+        m1.translation_all(v4)
+        m2.translation_all(v4)
+        __self__.A=m2.system_C()
+        for i in range(m2.number_of_atoms):
+            if m2.atoms[i].znacznik=="H1": m2_H1_ID=m2.atoms[i].ID
         m1.remove(m1_H_ID)
         m1.remove(m1_OH_ID)
         m2.remove(m2_H1_ID)
@@ -229,6 +247,64 @@ class peptide:
         __self__.coord.append(m1_table)
         m2_table=[m2.ID, 1 , m2.atoms]
         __self__.coord.append(m2_table)
+        b1=vector(m1_C_karb.x-m1_C_a.x, m1_C_karb.y-m1_C_a.y, m1_C_karb.z-m1_C_a.z)
+        b2=vector(m2_N.x-m1_C_karb.x, m2_N.y-m1_C_karb.y, m2_N.z-m1_C_karb.z) 
+        b3=vector(m2_C_a.x-m2_N.x, m2_C_a.y-m2_N.y, m2_C_a.z-m2_N.z)
+        dihedral_angle(b1, b2, b3)
+        
+    def add(__self__, monomer3):
+        m3=monomer3.replicate()
+        lp=len(__self__.coord)
+        for i in range(len(__self__.coord[lp-1][2])):
+            if __self__.coord[lp-1][2][i].znacznik=="Ckarb": m1_C_karb=__self__.coord[lp-1][2][i]
+            if __self__.coord[lp-1][2][i].znacznik=="C_a": m1_C_a=__self__.coord[lp-1][2][i]
+            if __self__.coord[lp-1][2][i].znacznik=="O_OH": 
+                m1_OH=__self__.coord[lp-1][2][i]
+                licznik_OH=i
+            if __self__.coord[lp-1][2][i].znacznik=="H": m1_H_ID=__self__.coord[lp-1][2][i].ID
+        for i in range(m3.number_of_atoms):
+            if m3.atoms[i].znacznik=="N": m3_N=m3.atoms[i]
+            if m3.atoms[i].znacznik=="C_a": m3_C_a=m3.atoms[i]
+#        x=-m1_C_karb.x
+#        y=-m1_C_karb.y
+#        z=-m1_C_karb.z
+#        v1=vector(x,y,z)
+#        for i in range(lp):
+#            for j in range(len(__self__.coord[i][2])):
+#                __self__.coord[i][2][j].translation(v1)
+        x=-m3_N.x
+        y=-m3_N.y
+        z=-m3_N.z
+        v2=vector(x,y,z)
+        m3.translation_all(v2)
+        B=m3.system_N()
+#        print(__self__.A)
+#        print(B)
+#        m3.rotate_all(transpose(B))
+#        m3.rotate_all(__self__.A)
+        x=m1_OH.x
+        y=m1_OH.y
+        z=m1_OH.z
+#        v3=vector(x,y,z)
+#        a=v3.leng()
+#        v3.x=v3.x/a*1.4
+#        v3.y=v3.y/a*1.4
+#        v3.z=v3.z/a*1.4
+#        m3.translation_all(v3)
+        for i in range(m3.number_of_atoms):
+            if m3.atoms[i].znacznik=="H1": m3_H1_ID=m3.atoms[i].ID
+#        __self__.A=m3.system_C()
+        __self__.coord[lp-1][2].pop(licznik_OH)
+        for i in range(len(__self__.coord[lp-1][2])):
+            if __self__.coord[lp-1][2][i].znacznik=="H": licznik_H=i
+        __self__.coord[lp-1][2].pop(licznik_H)
+#        m3.remove(m3_H1_ID)
+        licznik_monomerow=1
+        for i in range(lp):
+            if __self__.coord[i][0]==m3.ID: licznik_monomerow+=1
+        m3_table=[m3.ID, licznik_monomerow , m3.atoms]
+        __self__.coord.append(m3_table)
+         
     def __str__(__self__):
         string=""
         for i in range(len(__self__.coord)):
@@ -244,6 +320,10 @@ def transpose(m):
     c3=[m[0][2],m[1][2],m[2][2]]
     temp=[c1,c2,c3]
     return temp 
+def dihedral_angle(b1, b2, b3):
+    x=((b1.vector_prod(b2)).vector_prod(b2.vector_prod(b3))).scalar_prod(b2)/b2.leng()
+    y=(b1.vector_prod(b2)).scalar_prod(b2.vector_prod(b3))
+    return math.atan2(x,y)
 def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
     atoms_param=[]  #parametry kolejnych atomow
     no_at=0  #number of atoms
@@ -343,7 +423,7 @@ def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
     if len(wazne_atomy)!=8: ID="?"
     return  monomer(ID, no_at, atoms_param, no_bonds , bonds, wazne_atomy)
 
-file=open('Components-pub.cif')
+file=open('new.cif')
 i=0
 table =[]
 number_of_lines=0
@@ -381,9 +461,10 @@ for line in file:
     table =[]
     number_of_lines=0
 #for key in monomers_list:
-#    monomers_list[key].system_C()
+#    print(key)
 #    monomers_list[key].system_N()
 #print(len(monomers_list))
 aa=peptide()
-aa.synthesize(monomers_list["C3Y"], monomers_list["C3Y"])
+aa.synthesize(monomers_list["ALA"], monomers_list["ALA"])
+#aa.add(monomers_list["ALA"])
 print(aa)
