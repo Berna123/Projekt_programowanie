@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed May 17 22:54:53 2017
-
-@author: barbara
-"""
 import re
 import math
 class vector:
@@ -475,13 +469,21 @@ for line in file:
 #    print(key)
 #    monomers_list[key].system_N()
 #print(len(monomers_list))
+data=open('data.txt')
+words2=""
+table2=[]
+for line in data:
+    words2=re.split("\s+",line.strip())
+    table2.append(words2)
+
+
 aa=peptide()
-aa.synthesize(monomers_list["ALA"], monomers_list["ALA"])
-aa.add(monomers_list["ALA"])
-aa.add(monomers_list["ALA"])
-aa.add(monomers_list["ALA"])
-aa.add(monomers_list["ALA"])
-print(aa)
+aa.synthesize(monomers_list[table2[0][0]], monomers_list[table2[1][0]])
+for w9 in range (0, (len(table2)-2)):
+    print (w9)
+    aa.add(monomers_list[table2[w9+2][0]])
+
+#print(aa)
 
 f=open('output.pdb', 'w')
 i=0
@@ -491,4 +493,3 @@ for w7 in range (len(aa.coord)):
     for w8 in range (len(aa.coord[w7][2])):
         n+=1
         make_output(aa, w7, w8, n)
-        

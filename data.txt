@@ -1,0 +1,5 @@
+ALA   nanana
+ALC   nanaa
+ALA
+ALC   
+ALA
