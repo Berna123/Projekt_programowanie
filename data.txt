@@ -1,5 +1,4 @@
-ALA   nanana
-ALC   nanaa
 ALA
-ALC   
+LEU
 ALA
+MET

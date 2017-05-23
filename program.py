@@ -1,5 +1,6 @@
 import re
 import math
+import sys
 class vector:
     x=0
     y=0
@@ -194,65 +195,16 @@ class monomer:
 class peptide:
     coord=[]
     A=[]
-    def synthesize(__self__,monomer1, monomer2):
+    def start(__self__, monomer1):
         m1=monomer1.replicate()
-        m2=monomer2.replicate()
         for i in range(m1.number_of_atoms):
-            if m1.atoms[i].znacznik=="Ckarb": m1_C_karb=m1.atoms[i]
-            if m1.atoms[i].znacznik=="C_a": m1_C_a=m1.atoms[i]
-            if m1.atoms[i].znacznik=="O_OH": 
-                m1_OH=m1.atoms[i]
-                m1_OH_ID=m1.atoms[i].ID
-            if m1.atoms[i].znacznik=="H": m1_H_ID=m1.atoms[i].ID
-        for i in range(m2.number_of_atoms):
-            if m2.atoms[i].znacznik=="N": m2_N=m2.atoms[i]
-            if m2.atoms[i].znacznik=="C_a": m2_C_a=m2.atoms[i]
-            if m2.atoms[i].znacznik=="Ckarb": m2_C_karb=m2.atoms[i]
-        x=-m1_C_karb.x
-        y=-m1_C_karb.y
-        z=-m1_C_karb.z
-        v1=vector(x,y,z)
-        m1.translation_all(v1)
+            if m1.atoms[i].znacznik=="Ckarb": C=m1.atoms[i]
+        v=vector(-C.x, -C.y, -C.z)
+        m1.translation_all(v)
         __self__.A=m1.system_C()
-        x=-m2_N.x
-        y=-m2_N.y
-        z=-m2_N.z
-        v2=vector(x,y,z)
-        m2.translation_all(v2)
-        B=m2.system_N()
-        m2.rotate_all(transpose(B))
-        m2.rotate_all(__self__.A)
-        x=m1_OH.x
-        y=m1_OH.y
-        z=m1_OH.z
-        v3=vector(x,y,z)
-        a=v3.leng()
-        v3.x=v3.x/a*1.4
-        v3.y=v3.y/a*1.4
-        v3.z=v3.z/a*1.4
-        m2.translation_all(v3)
-        x=-m2_C_karb.x
-        y=-m2_C_karb.y
-        z=-m2_C_karb.z
-        v4=vector(x,y,z)
-        m1.translation_all(v4)
-        m2.translation_all(v4)
-        __self__.A=m2.system_C()
-        for i in range(m2.number_of_atoms):
-            if m2.atoms[i].znacznik=="H1": m2_H1_ID=m2.atoms[i].ID
-        m1.remove(m1_H_ID)
-        m1.remove(m1_OH_ID)
-        m2.remove(m2_H1_ID)
         m1_table=[m1.ID, 1 , m1.atoms]
-        __self__.coord.append(m1_table)
-        m2_table=[m2.ID, 2 , m2.atoms]
-        __self__.coord.append(m2_table)
-        b1=vector(m1_C_karb.x-m1_C_a.x, m1_C_karb.y-m1_C_a.y, m1_C_karb.z-m1_C_a.z)
-        b2=vector(m2_N.x-m1_C_karb.x, m2_N.y-m1_C_karb.y, m2_N.z-m1_C_karb.z) 
-        b3=vector(m2_C_a.x-m2_N.x, m2_C_a.y-m2_N.y, m2_C_a.z-m2_N.z)
-        dihedral_angle(b1, b2, b3)
-        
-    def add(__self__, monomer3):
+        __self__.coord.append(m1_table)        
+    def add(__self__, monomer3, fi_i, psi_i):
         m3=monomer3.replicate()
         lp=len(__self__.coord)
         for i in range(len(__self__.coord[lp-1][2])):
@@ -266,6 +218,7 @@ class peptide:
             if m3.atoms[i].znacznik=="N": m3_N=m3.atoms[i]
             if m3.atoms[i].znacznik=="C_a": m3_C_a=m3.atoms[i]
             if m3.atoms[i].znacznik=="Ckarb": m3_C_karb=m3.atoms[i]
+            if m3.atoms[i].znacznik=="O_OH": m3_O_OH=m3.atoms[i]
         x=-m3_N.x
         y=-m3_N.y
         z=-m3_N.z
@@ -283,6 +236,13 @@ class peptide:
         v3.y=v3.y/a*1.4
         v3.z=v3.z/a*1.4
         m3.translation_all(v3)
+        b1=vector(m1_C_karb.x-m1_C_a.x, m1_C_karb.y-m1_C_a.y, m1_C_karb.z-m1_C_a.z)
+        b2=vector(m3_N.x-m1_C_karb.x, m3_N.y-m1_C_karb.y, m3_N.z-m1_C_karb.z) 
+        b3=vector(m3_C_a.x-m3_N.x, m3_C_a.y-m3_N.y, m3_C_a.z-m3_N.z)
+        omega_temp = dihedral_angle(b1, b2, b3)
+        print(omega_temp)
+        omega=omega_temp - math.pi
+        __self__.rotate_da("omega", omega , m3_N, m1_C_karb,m3)
         for i in range(m3.number_of_atoms):
             if m3.atoms[i].znacznik=="H1": m3_H1_ID=m3.atoms[i].ID
         __self__.A=m3.system_C()
@@ -303,7 +263,6 @@ class peptide:
         for i in range(len(__self__.coord)):
             for j in range(len(__self__.coord[i][2])):
                 __self__.coord[i][2][j].translation(v4)
-         
     def __str__(__self__):
         string=""
         for i in range(len(__self__.coord)):
@@ -311,6 +270,31 @@ class peptide:
                 string+=('%3s  %7.4f  %7.4f  %7.4f' %(__self__.coord[i][2][j].element,__self__.coord[i][2][j].x,__self__.coord[i][2][j].y,__self__.coord[i][2][j].z))
                 string+='\n'
         return string
+    def rotate_da(__self__, type_, angle, N, C, m3):
+        v1=vector(-C.x, -C.y, -C.z)
+        v2=vector((N.x-C.x),(N.y-C.y), (N.z-C.z))
+        a=v2.leng()
+        v2.x=v2.x/a
+        v2.y=v2.y/a
+        v2.z=v2.z/a
+        len_peptide=len(__self__.coord)
+        m3.translation_all(v1)
+        for i in range(len_peptide):
+            for j in range(len(__self__.coord[i][2])):
+                __self__.coord[i][2][j].translation(v1)
+        M=[]
+        M1=[math.cos(angle)+v2.x*v2.x*(1-math.cos(angle)), v2.x*v2.y*(1-math.cos(angle))+v2.z*math.sin(angle), v2.z*v2.x*(1-math.cos(angle))-v2.y*math.sin(angle)]
+        M2=[v2.x*v2.y*(1-math.cos(angle))-v2.z*math.sin(angle),math.cos(angle)+v2.y*v2.y*(1-math.cos(angle)), v2.z*v2.y*(1-math.cos(angle))+v2.x*math.sin(angle) ]
+        M3=[v2.x*v2.z*(1-math.cos(angle))+v2.y*math.sin(angle), v2.z*v2.y*(1-math.cos(angle))-v2.x*math.sin(angle), math.cos(angle)+v2.z*v2.z*(1-math.cos(angle))]
+        M.append(M1)
+        M.append(M2)
+        M.append(M3)
+        if type_=="omega":
+            m3.rotate_all(M)
+        if type_=="fi":
+            for i in range(m3.number_of_atoms):
+                if m3.atoms[i].znacznik!="N" and m3.atoms[i].znacznik!="H":
+                    m3.atoms[i].rotate(M)
 ### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
 def transpose(m):
     temp=[]
@@ -428,7 +412,7 @@ def make_output(peptyd, i, j, n):
     string+='\n'
     f.write(string)
 
-file=open('new.cif')
+file=open('Components-pub.cif')
 i=0
 table =[]
 number_of_lines=0
@@ -443,7 +427,7 @@ l7=[]
 l8=[]
 for line in file:  
     i+=1
-    if i>21362: break
+#    if i>21362: break
 #    if i>8355: break
 #    if i>3785: break
     words=re.split("\s+",line.strip())
@@ -469,7 +453,8 @@ for line in file:
 #    print(key)
 #    monomers_list[key].system_N()
 #print(len(monomers_list))
-data=open('data.txt')
+
+data=open(sys.argv[1])
 words2=""
 table2=[]
 for line in data:
@@ -478,11 +463,10 @@ for line in data:
 
 
 aa=peptide()
-aa.synthesize(monomers_list[table2[0][0]], monomers_list[table2[1][0]])
-for w9 in range (0, (len(table2)-2)):
-    print (w9)
-    aa.add(monomers_list[table2[w9+2][0]])
-
+aa.start(monomers_list[table2[0][0]])
+for w9 in range (0, (len(table2)-1)):
+#    print (w9)
+    aa.add(monomers_list[table2[w9+1][0]], -0.9948, -0.8203)
 #print(aa)
 
 f=open('output.pdb', 'w')
