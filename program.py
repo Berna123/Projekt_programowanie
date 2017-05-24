@@ -240,9 +240,14 @@ class peptide:
         b2=vector(m3_N.x-m1_C_karb.x, m3_N.y-m1_C_karb.y, m3_N.z-m1_C_karb.z) 
         b3=vector(m3_C_a.x-m3_N.x, m3_C_a.y-m3_N.y, m3_C_a.z-m3_N.z)
         omega_temp = dihedral_angle(b1, b2, b3)
-        print(omega_temp)
         omega=omega_temp - math.pi
-        __self__.rotate_da("omega", omega , m3_N, m1_C_karb,m3)
+        __self__.rotate_da("omega", omega , m3_N, m1_C_karb,m3) 
+        b1=vector(m3_N.x-m1_C_karb.x, m3_N.y-m1_C_karb.y, m3_N.z-m1_C_karb.z) 
+        b2=vector(m3_C_a.x-m3_N.x, m3_C_a.y-m3_N.y, m3_C_a.z-m3_N.z)
+        b3=vector(m3_C_karb.x-m3_C_a.x, m3_C_karb.y-m3_C_a.y, m3_C_karb.z-m3_C_a.z)
+        fi_temp = dihedral_angle(b1, b2, b3)
+        fi=fi_temp - fi_i
+        __self__.rotate_da("fi", fi ,m3_C_a, m3_N,m3)
         for i in range(m3.number_of_atoms):
             if m3.atoms[i].znacznik=="H1": m3_H1_ID=m3.atoms[i].ID
         __self__.A=m3.system_C()
@@ -289,12 +294,7 @@ class peptide:
         M.append(M1)
         M.append(M2)
         M.append(M3)
-        if type_=="omega":
-            m3.rotate_all(M)
-        if type_=="fi":
-            for i in range(m3.number_of_atoms):
-                if m3.atoms[i].znacznik!="N" and m3.atoms[i].znacznik!="H":
-                    m3.atoms[i].rotate(M)
+        m3.rotate_all(M)
 ### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
 def transpose(m):
     temp=[]
@@ -427,7 +427,7 @@ l7=[]
 l8=[]
 for line in file:  
     i+=1
-#    if i>21362: break
+    if i>21362: break
 #    if i>8355: break
 #    if i>3785: break
     words=re.split("\s+",line.strip())
