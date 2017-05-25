@@ -437,9 +437,9 @@ for line in file:
     if i==3: 
        table = [] 
        continue
-    for j in range(10):
+    for j in range(0,10):
         if table[j][0]=="_chem_comp.type":
-            if table[j][1][1:10]=="L-peptide" or table[j][1][1:10]=="L-PEPTIDE":
+            if table[j][1][1:10]=="L-peptide" or table[j][1][1:10]=="L-PEPTIDE" or ("GLY" in table[j-2]):
     # making monomer
                monomer_i=upload_data(table, l1, l2, l3, l4, l5, l7, l8)
                if monomer_i.ID!="?":
@@ -454,7 +454,7 @@ for line in file:
 #    monomers_list[key].system_N()
 #print(len(monomers_list))
 
-data=open(sys.argv[1])
+data=open('data.txt')
 words2=""
 table2=[]
 for line in data:
@@ -466,7 +466,7 @@ aa=peptide()
 aa.start(monomers_list[table2[0][0]])
 for w9 in range (0, (len(table2)-1)):
 #    print (w9)
-    aa.add(monomers_list[table2[w9+1][0]], -0.9948, -0.8203)
+    aa.add(monomers_list[table2[w9+1][0]], float(table2[w9+1][1]), float(table2[w9+1][2]))
 #print(aa)
 
 f=open('output.pdb', 'w')
