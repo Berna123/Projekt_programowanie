@@ -40,9 +40,12 @@ class atom:
         s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
         return s
     def rotate(__self__,m):
-        __self__.x=__self__.x*m[0][0]+__self__.y*m[1][0]+__self__.z*m[2][0]
-        __self__.y=__self__.x*m[0][1]+__self__.y*m[1][1]+__self__.z*m[2][1]
-        __self__.z=__self__.x*m[0][2]+__self__.y*m[1][2]+__self__.z*m[2][2]
+        x=__self__.x
+        y=__self__.y
+        z=__self__.z
+        __self__.x=x*m[0][0]+y*m[0][1]+z*m[0][2]
+        __self__.y=x*m[1][0]+y*m[1][1]+z*m[1][2]
+        __self__.z=x*m[2][0]+y*m[2][1]+z*m[2][2]
     def translation(__self__,v):
         __self__.x+=v.x
         __self__.y+=v.y
@@ -204,7 +207,7 @@ class peptide:
         __self__.A=m1.system_C()
         m1_table=[m1.ID, 1 , m1.atoms]
         __self__.coord.append(m1_table)        
-    def add(__self__, monomer3, fi_i, psi_i):
+    def add(__self__, monomer3, omega_i, fi_i, psi_i):
         m3=monomer3.replicate()
         lp=len(__self__.coord)
         for i in range(len(__self__.coord[lp-1][2])):
@@ -240,7 +243,7 @@ class peptide:
         b2=vector(m3_N.x-m1_C_karb.x, m3_N.y-m1_C_karb.y, m3_N.z-m1_C_karb.z) 
         b3=vector(m3_C_a.x-m3_N.x, m3_C_a.y-m3_N.y, m3_C_a.z-m3_N.z)
         omega_temp = dihedral_angle(b1, b2, b3)
-        omega=omega_temp - math.pi
+        omega=omega_temp - omega_i
         __self__.rotate_da("omega", omega , m3_N, m1_C_karb,m3) 
         b1=vector(m3_N.x-m1_C_karb.x, m3_N.y-m1_C_karb.y, m3_N.z-m1_C_karb.z) 
         b2=vector(m3_C_a.x-m3_N.x, m3_C_a.y-m3_N.y, m3_C_a.z-m3_N.z)
@@ -248,6 +251,12 @@ class peptide:
         fi_temp = dihedral_angle(b1, b2, b3)
         fi=fi_temp - fi_i
         __self__.rotate_da("fi", fi ,m3_C_a, m3_N,m3)
+        b1=vector(m3_C_a.x-m3_N.x, m3_C_a.y-m3_N.y, m3_C_a.z-m3_N.z)
+        b2=vector(m3_C_karb.x-m3_C_a.x, m3_C_karb.y-m3_C_a.y, m3_C_karb.z-m3_C_a.z)
+        b3=vector(m3_O_OH.x-m3_C_karb.x, m3_O_OH.y-m3_C_karb.y, m3_O_OH.z-m3_C_karb.z)
+        psi_temp = dihedral_angle(b1, b2, b3)
+        psi=psi_temp - psi_i
+        __self__.rotate_da("psi", psi ,m3_C_karb, m3_C_a,m3)
         for i in range(m3.number_of_atoms):
             if m3.atoms[i].znacznik=="H1": m3_H1_ID=m3.atoms[i].ID
         __self__.A=m3.system_C()
@@ -265,9 +274,11 @@ class peptide:
         y=-m3_C_karb.y
         z=-m3_C_karb.z
         v4=vector(x,y,z)
-        for i in range(len(__self__.coord)):
-            for j in range(len(__self__.coord[i][2])):
-                __self__.coord[i][2][j].translation(v4)
+#        for i in range(len(__self__.coord)):
+#            for j in range(len(__self__.coord[i][2])):
+#                __self__.coord[i][2][j].translation(v4)
+#                if __self__.coord[i][2][j].znacznik=="H": print(__self__.coord[i][2][j])
+        
     def __str__(__self__):
         string=""
         for i in range(len(__self__.coord)):
@@ -276,17 +287,17 @@ class peptide:
                 string+='\n'
         return string
     def rotate_da(__self__, type_, angle, N, C, m3):
-        v1=vector(-C.x, -C.y, -C.z)
-        v2=vector((N.x-C.x),(N.y-C.y), (N.z-C.z))
-        a=v2.leng()
-        v2.x=v2.x/a
-        v2.y=v2.y/a
-        v2.z=v2.z/a
+        v1=vector(-N.x, -N.y, -N.z)
         len_peptide=len(__self__.coord)
         m3.translation_all(v1)
         for i in range(len_peptide):
             for j in range(len(__self__.coord[i][2])):
                 __self__.coord[i][2][j].translation(v1)
+        v2=vector((N.x-C.x),(N.y-C.y), (N.z-C.z))
+        a=v2.leng()
+        v2.x=v2.x/a
+        v2.y=v2.y/a
+        v2.z=v2.z/a
         M=[]
         M1=[math.cos(angle)+v2.x*v2.x*(1-math.cos(angle)), v2.x*v2.y*(1-math.cos(angle))+v2.z*math.sin(angle), v2.z*v2.x*(1-math.cos(angle))-v2.y*math.sin(angle)]
         M2=[v2.x*v2.y*(1-math.cos(angle))-v2.z*math.sin(angle),math.cos(angle)+v2.y*v2.y*(1-math.cos(angle)), v2.z*v2.y*(1-math.cos(angle))+v2.x*math.sin(angle) ]
@@ -294,7 +305,24 @@ class peptide:
         M.append(M1)
         M.append(M2)
         M.append(M3)
-        m3.rotate_all(M)
+        MM=[]
+        MM1=[math.cos(-angle)+v2.x*v2.x*(1-math.cos(-angle)), v2.x*v2.y*(1-math.cos(-angle))+v2.z*math.sin(-angle), v2.z*v2.x*(1-math.cos(-angle))-v2.y*math.sin(-angle)]
+        MM2=[v2.x*v2.y*(1-math.cos(-angle))-v2.z*math.sin(-angle),math.cos(-angle)+v2.y*v2.y*(1-math.cos(-angle)), v2.z*v2.y*(1-math.cos(-angle))+v2.x*math.sin(-angle) ]
+        MM3=[v2.x*v2.z*(1-math.cos(-angle))+v2.y*math.sin(-angle), v2.z*v2.y*(1-math.cos(-angle))-v2.x*math.sin(-angle), math.cos(-angle)+v2.z*v2.z*(1-math.cos(-angle))]
+        MM.append(MM1)
+        MM.append(MM2)
+        MM.append(MM3)
+        if type_=="fi" or type_=="omega":
+            m3.rotate_all(M)
+        if type_=="fi":
+            for i in range(m3.number_of_atoms):
+                if m3.atoms[i].znacznik=="H2":
+                    m3.atoms[i].rotate(MM)
+        if type_=="psi":
+            for i in range(m3.number_of_atoms):
+                if m3.atoms[i].znacznik=="O=" or m3.atoms[i].znacznik=="O_OH" or m3.atoms[i].znacznik=="H":
+                    m3.atoms[i].rotate(M)
+                    
 ### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
 def transpose(m):
     temp=[]
@@ -454,7 +482,7 @@ for line in file:
 #    monomers_list[key].system_N()
 #print(len(monomers_list))
 
-data=open('data.txt')
+data=open(sys.argv[1])
 words2=""
 table2=[]
 for line in data:
@@ -466,7 +494,7 @@ aa=peptide()
 aa.start(monomers_list[table2[0][0]])
 for w9 in range (0, (len(table2)-1)):
 #    print (w9)
-    aa.add(monomers_list[table2[w9+1][0]], float(table2[w9+1][1]), float(table2[w9+1][2]))
+    aa.add(monomers_list[table2[w9+1][0]],math.pi,  float(table2[w9+1][1]), float(table2[w9+1][2]))
 #print(aa)
 
 f=open('output.pdb', 'w')
