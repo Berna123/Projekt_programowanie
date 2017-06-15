@@ -1,27 +1,47 @@
 import re
 import math
 import sys
+## \brief Wektory w układzie kartezjańskim
+# \author Bernadeta Nowosielska
+# \param x,y,z wspołrzędne w układzie karteziańskim
 class vector:
     x=0
     y=0
     z=0
+    ## \brief Konstuktor 
+    # \param a,b,c pobierane współrzędne
     def __init__(__self__,a,b,c):
         __self__.x=a
         __self__.y=b
         __self__.z=c
+    ## \brief Długość wektora	
+    # \return długość wekotora
     def leng (__self__):
         return math.sqrt(__self__.x*__self__.x + __self__.y*__self__.y + __self__.z*__self__.z )
+    ## \brief Iloczyn wektorowy
+	# \param p atom lub wektor
+    # \return obiekt klasy wektor 
     def vector_prod(__self__,p):
         w=vector(0,0,0)
         w.x=__self__.y*p.z-__self__.z*p.y
         w.y=-__self__.x*p.z+__self__.z*p.x
         w.z=__self__.x*p.y-__self__.y*p.x
         return w
+    ## \brief Iloczyn skalarny
+    # \param p atom lub wektor
+    # \return wynik iloczynu skalarnego
     def scalar_prod(__self__,p):
         s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
         return s
+    ## \brief Pozwala na wydrukowanie wektora
     def __str__(__self__):
         return "[ "+str(__self__.x) + ", "+str(__self__.y) + ", "+str(__self__.z) + "]"
+## \brief Atomy 
+# \author Bernadeta Nowosielska
+# \param x,y,z współrzędne w układzie kartezjanskim
+# \param ID unikalny identyfikator
+# \param element pierwiastek chemiczny
+# \param znacznik atomy "funkcyjne"
 class atom:
     x=0
     y=0
@@ -29,6 +49,9 @@ class atom:
     ID=""
     element=""
     znacznik=""
+    ## \brief Konstuktor
+    # \param a,b,c pobierana współrzędne
+    # \param ID, element, znacznik pobierane stringi 
     def __init__(__self__,a,b,c,ID,element, znacznik):
         __self__.x=a
         __self__.y=b
@@ -36,33 +59,62 @@ class atom:
         __self__.ID=ID
         __self__.element=element
         __self__.znacznik=znacznik
+	
+    ## \brief Iloczyn skalarny
+    # \param p atom lub wektor
+    # \return wynik iloczynu skalarnego		
     def scalar_prod(__self__,p):
         s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
         return s
+	
+    ## \brief Obrót jednego atomu
+    # \param m macierz obrotu
     def rotate(__self__,m):
+        """ Zmienia wspołrzędne atomu 
+        """
         x=__self__.x
         y=__self__.y
         z=__self__.z
         __self__.x=x*m[0][0]+y*m[0][1]+z*m[0][2]
         __self__.y=x*m[1][0]+y*m[1][1]+z*m[1][2]
         __self__.z=x*m[2][0]+y*m[2][1]+z*m[2][2]
+	
+    ## \brief Przesunięcie atomu 
+    # \param v wektor, o który następuje przesunięcie
     def translation(__self__,v):
+        """ Zmienia wspołrzędne atomu 
+        """
         __self__.x+=v.x
         __self__.y+=v.y
         __self__.z+=v.z
+    ## \brief Iloczyn wektorowy
+	# \param p atom lub wektor
+    # \return obiekt klasy wektor 
     def vector_prod(__self__,p):
         w=vector(0,0,0)
         w.x=__self__.y*p.z-__self__.z*p.y
         w.y=-__self__.x*p.z+__self__.z*p.x
         w.z=__self__.x*p.y-__self__.y*p.x
         return w
+    ## \brief Pozwala na wydrukowanie wektora
     def __str__(__self__):
         return ( '%6s %2s %7.4f %7.4f %7.4f %6s' %(__self__.ID,__self__.element, __self__.x,__self__.y,__self__.z, __self__.znacznik))
+## \brief Monomery
+# \author Bernadeta Nowosielska
+# \param ID nazwa monomeru
+# \param number_of_atoms liczba atomów w monomerze
+# \param number_of_bonds liczba wiązań w monomerze
 class monomer:
     ID=""
     number_of_atoms = 0
     number_of_bonds = 0
-#    atoms=[]
+    ## \brief Konstuktor
+	# \param ID nazwa
+	# \param noa liczba atomów w monomerze
+    # \param atoms tablica zawierająca obiekty klasy atom
+	# \param nob liczba wiązań w monomerze
+	# \param bonds tablica wiązań
+	# \param wazne_atomy tablica atomów funkcyjnych
     def __init__(__self__,ID,noa, atoms, nob, bonds, wazne_atomy):
         __self__.atoms= []
         __self__.bonds= []
@@ -71,7 +123,6 @@ class monomer:
             __self__.wazne_atomy.append(wazne_atomy[i])
         for i in range (nob):
             __self__.bonds.append(bonds[i])
-#        print(len(__self__.atoms))
         __self__.ID=ID
         __self__.number_of_atoms=noa
         __self__.number_of_bonds=nob
@@ -83,6 +134,7 @@ class monomer:
             element=atoms[i].element
             znacznik=atoms[i].znacznik
             __self__.atoms.append(atom(x,y,z,ID,element,znacznik))
+	## \brief Tworzy wierną kopję monomeru
     def replicate(__self__):
         new_atoms=[]
         new_bonds=[]
@@ -91,6 +143,8 @@ class monomer:
         for i in range (__self__.number_of_bonds):
             new_bonds.append(__self__.bonds[i])
         return monomer(__self__.ID,__self__.number_of_atoms, new_atoms, __self__.number_of_bonds, new_bonds, __self__.wazne_atomy)
+    ## \brief Obrót wszystkich atomu monomeru
+    # \param m macierz obrotu
     def rotate_all(__self__,m):
         for i in range(__self__.number_of_atoms):
            x=__self__.atoms[i].x
@@ -99,12 +153,18 @@ class monomer:
            __self__.atoms[i].x=x*m[0][0]+y*m[0][1]+z*m[0][2]
            __self__.atoms[i].y=x*m[1][0]+y*m[1][1]+z*m[1][2]
            __self__.atoms[i].z=x*m[2][0]+y*m[2][1]+z*m[2][2]
+	## \brief Przesunięcie wszystkich atomów monomeru
+    # \param v wektor, o który następuje przesunięcie
     def translation_all(__self__, v):
         for i in range(__self__.number_of_atoms):
             __self__.atoms[i].x+=v.x
             __self__.atoms[i].y+=v.y
             __self__.atoms[i].z+=v.z
+	## \brief Tworzy macierz układu współrzędnyc na C
+	# \return Macierz układu
     def system_C(__self__):
+        """ Tworzy macierz układu współrzędnych na karbonylowym atomie węgla. Tak aby oś x znajdowała się na wiązaniu C-OH, a oś y była prostopadła do grupy.
+        """
         for i in range(len(__self__.atoms)):
             if __self__.atoms[i].znacznik=="Ckarb": C_karb=__self__.atoms[i]
             if __self__.atoms[i].znacznik=="C_a": C_a=__self__.atoms[i]
@@ -135,8 +195,11 @@ class monomer:
         v_z.z=v_z.z/a
         A=[[v_x.x, v_y.x, v_z.x],[v_x.y, v_y.y, v_z.y], [v_x.z, v_y.z, v_z.z]]
         return(A)
-#        print(A)
+	## \brief Tworzy macierz układu współrzędnyc na C
+	# \return Macierz układu
     def system_N(__self__):
+        """ Tworzy macierz układu współrzędnych na karbonylowym atomie węgla. Tak aby oś x znajdowała się na wiązaniu N-X, a oś y była prostopadła do atomów H i węgla alpha.
+        """
         l=0
         for i in range(__self__.number_of_atoms):
             if __self__.atoms[i].znacznik=="C_a":
@@ -146,12 +209,9 @@ class monomer:
                 H1=__self__.atoms[i]
                 __self__.atoms[i].znacznik="H1"
                 l=1
-#                H1_ID=__self__.wazne_atomy[i].ID
             if __self__.atoms[i].znacznik=="nH" and l==1: 
                 H2=__self__.atoms[i]
                 __self__.atoms[i].znacznik="H2"
-#        for i in range(__self__.number_of_atoms):
-#            if __self__.atoms[i].ID==H1_ID : __self__.atoms[i].znacznik="H1"
         x=-H1.x+N.x
         y=-H1.y+N.y
         z=-H1.z+N.z
@@ -180,12 +240,15 @@ class monomer:
         v_z.z=v_z.z/a         
         B=[[v_x.x, v_y.x, v_z.x],[v_x.y, v_y.y, v_z.y], [v_x.z, v_y.z, v_z.z]]
         return(B)
+	## \brief Usuwa atom
+	# \param ID ID atomu który będzie usunięty
     def remove(__self__, ID):
         for i in range(__self__.number_of_atoms):
             if __self__.atoms[i].ID==ID:
                 __self__.atoms.pop(i)
                 __self__.number_of_atoms-=1
                 break
+	## \brief Pozwala na wydrukowanie monomru
     def __str__(__self__):
         string="ID:  "+__self__.ID + "    Number of atoms:   " + str(__self__.number_of_atoms) + '\n'
         for i in range(__self__.number_of_atoms):       
@@ -195,9 +258,14 @@ class monomer:
         for i in range(__self__.number_of_bonds):
             string+= ('%6s %6s %6s' %(__self__.bonds[i][0], __self__.bonds[i][1], __self__.bonds[i][2] ))+'\n'
         return string
+## \brief Peptydy
+# \author Bernadeta Nowosielska
+# \param coord tablica zawierajaca tablicę, która zawiera ID monomeru, jego licznik oraz tablię obiektów klasy atom.
 class peptide:
     coord=[]
     A=[]
+	## \brief Dodaje pierwszy monomer do peptydu
+	# \param monomer1 obiekt klasy monomer
     def start(__self__, monomer1):
         m1=monomer1.replicate()
         for i in range(m1.number_of_atoms):
@@ -206,7 +274,10 @@ class peptide:
         m1.translation_all(v)
         __self__.A=m1.system_C()
         m1_table=[m1.ID, 1 , m1.atoms]
-        __self__.coord.append(m1_table)        
+        __self__.coord.append(m1_table) 
+	## \brief Dodaje kolejne monomery
+	# \param monomer3 dodawany monomer
+	# \param omega_i, fi_i, psi_i kąty torsyjne, które zostaną ustawione
     def add(__self__, monomer3, omega_i, fi_i, psi_i):
         m3=monomer3.replicate()
         lp=len(__self__.coord)
@@ -274,11 +345,7 @@ class peptide:
         y=-m3_C_karb.y
         z=-m3_C_karb.z
         v4=vector(x,y,z)
-#        for i in range(len(__self__.coord)):
-#            for j in range(len(__self__.coord[i][2])):
-#                __self__.coord[i][2][j].translation(v4)
-#                if __self__.coord[i][2][j].znacznik=="H": print(__self__.coord[i][2][j])
-        
+	## \brief Pozwala na wydrukowanie peptydu
     def __str__(__self__):
         string=""
         for i in range(len(__self__.coord)):
@@ -286,6 +353,11 @@ class peptide:
                 string+=('%3s  %7.4f  %7.4f  %7.4f' %(__self__.coord[i][2][j].element,__self__.coord[i][2][j].x,__self__.coord[i][2][j].y,__self__.coord[i][2][j].z))
                 string+='\n'
         return string
+	## \brief Obraca o kąt torsyjny
+	# \param type_ wybrany kąt torsyjn "omega", "fi" lub "psi"
+	# \param angle wartość o którą nastąpi obrót
+	# \param N, C końcowy i początkowy atom wiązania, na którym będzie następować obrót (obiekt klasy atom)
+	# \param m3 monomer, który będzie obracany
     def rotate_da(__self__, type_, angle, N, C, m3):
         v1=vector(-N.x, -N.y, -N.z)
         len_peptide=len(__self__.coord)
@@ -322,8 +394,10 @@ class peptide:
             for i in range(m3.number_of_atoms):
                 if m3.atoms[i].znacznik=="O=" or m3.atoms[i].znacznik=="O_OH" or m3.atoms[i].znacznik=="H":
                     m3.atoms[i].rotate(M)
-                    
-### tworzy obiekt klasy atom, następnie z atomow obiekt monomer klasy monomer, replikuje monomer do nowego obiektu
+## \brief Transpozyjcja macierzy
+# \param m maciwerz, która ma zostać zmieniona
+# \return macierz transponowana
+# \author Bernadeta Nowosielska
 def transpose(m):
     temp=[]
     c1=[m[0][0],m[1][0],m[2][0]]
@@ -331,6 +405,10 @@ def transpose(m):
     c3=[m[0][2],m[1][2],m[2][2]]
     temp=[c1,c2,c3]
     return temp 
+## \brief Wyznaczanie kąta torsyjnego
+# \param b1, b2, b3 trzy wektory pomiędzy, którymi liczony jest kąt torsyjny
+# \return wartość kąta torsyjnego
+# \author Bernadeta Nowosielska
 def dihedral_angle(b1, b2, b3):
     x=((b1.vector_prod(b2)).vector_prod(b2.vector_prod(b3))).scalar_prod(b2)/b2.leng()
     y=(b1.vector_prod(b2)).scalar_prod(b2.vector_prod(b3))
