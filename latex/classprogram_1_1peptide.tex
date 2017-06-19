@@ -1,0 +1,124 @@
+\subsection{Dokumentacja klasy program.\+peptide}
+\label{classprogram_1_1peptide}\index{program.\+peptide@{program.\+peptide}}
+
+
+Peptydy.  
+
+
+\subsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+def \textbf{ start} (\+\_\+\+\_\+self\+\_\+\+\_\+, monomer1)
+\begin{DoxyCompactList}\small\item\em Dodaje pierwszy monomer do peptydu. \end{DoxyCompactList}\item 
+def \textbf{ add} (\+\_\+\+\_\+self\+\_\+\+\_\+, monomer3, omega\+\_\+i, fi\+\_\+i, psi\+\_\+i)
+\begin{DoxyCompactList}\small\item\em Dodaje kolejne monomery. \end{DoxyCompactList}\item 
+def \textbf{ \+\_\+\+\_\+str\+\_\+\+\_\+} (\+\_\+\+\_\+self\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Pozwala na wydrukowanie peptydu. \end{DoxyCompactList}\item 
+def \textbf{ rotate\+\_\+da} (\+\_\+\+\_\+self\+\_\+\+\_\+, type\+\_\+, angle, N, C, m3)
+\begin{DoxyCompactList}\small\item\em Obraca o kąt torsyjny. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Statyczne atrybuty publiczne}
+\begin{DoxyCompactItemize}
+\item 
+list \textbf{ coord} = [$\,$]
+\item 
+list \textbf{ A} = [$\,$]
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Opis szczegółowy}
+Peptydy. 
+
+\begin{DoxyAuthor}{Autor}
+Bernadeta Nowosielska 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parametry}
+{\em coord} & tablica zawierajaca tablicę, która zawiera ID monomeru, jego licznik oraz tablię obiektów klasy atom. \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Dokumentacja funkcji składowych}
+\mbox{\label{classprogram_1_1peptide_a837884fbb3509dc1e7b165b7aefedf9f}} 
+\index{program\+::peptide@{program\+::peptide}!\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}!program\+::peptide@{program\+::peptide}}
+\paragraph{\+\_\+\+\_\+str\+\_\+\+\_\+()}
+{\footnotesize\ttfamily def program.\+peptide.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Pozwala na wydrukowanie peptydu. 
+
+\mbox{\label{classprogram_1_1peptide_a87723a307c97c4f8cb3bf96bfad8c345}} 
+\index{program\+::peptide@{program\+::peptide}!add@{add}}
+\index{add@{add}!program\+::peptide@{program\+::peptide}}
+\paragraph{add()}
+{\footnotesize\ttfamily def program.\+peptide.\+add (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{monomer3,  }\item[{}]{omega\+\_\+i,  }\item[{}]{fi\+\_\+i,  }\item[{}]{psi\+\_\+i }\end{DoxyParamCaption})}
+
+
+
+Dodaje kolejne monomery. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em monomer3} & dodawany monomer \\
+\hline
+{\em omega\+\_\+i,fi\+\_\+i,psi\+\_\+i} & kąty torsyjne, które zostaną ustawione \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classprogram_1_1peptide_ade6769d3ac6d9ffd1ab87ea21b53d1f1}} 
+\index{program\+::peptide@{program\+::peptide}!rotate\+\_\+da@{rotate\+\_\+da}}
+\index{rotate\+\_\+da@{rotate\+\_\+da}!program\+::peptide@{program\+::peptide}}
+\paragraph{rotate\+\_\+da()}
+{\footnotesize\ttfamily def program.\+peptide.\+rotate\+\_\+da (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{type\+\_\+,  }\item[{}]{angle,  }\item[{}]{N,  }\item[{}]{C,  }\item[{}]{m3 }\end{DoxyParamCaption})}
+
+
+
+Obraca o kąt torsyjny. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em type\+\_\+} & wybrany kąt torsyjn \char`\"{}omega\char`\"{}, \char`\"{}fi\char`\"{} lub \char`\"{}psi\char`\"{} \\
+\hline
+{\em angle} & wartość o którą nastąpi obrót \\
+\hline
+{\em N,C} & końcowy i początkowy atom wiązania, na którym będzie następować obrót (obiekt klasy atom) \\
+\hline
+{\em m3} & monomer, który będzie obracany \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classprogram_1_1peptide_aa8d59037618f51cdcd1c5c388542353d}} 
+\index{program\+::peptide@{program\+::peptide}!start@{start}}
+\index{start@{start}!program\+::peptide@{program\+::peptide}}
+\paragraph{start()}
+{\footnotesize\ttfamily def program.\+peptide.\+start (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{monomer1 }\end{DoxyParamCaption})}
+
+
+
+Dodaje pierwszy monomer do peptydu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em monomer1} & obiekt klasy monomer \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Dokumentacja atrybutów składowych}
+\mbox{\label{classprogram_1_1peptide_a16cef0faa25c5ff35af13fae940bc386}} 
+\index{program\+::peptide@{program\+::peptide}!A@{A}}
+\index{A@{A}!program\+::peptide@{program\+::peptide}}
+\paragraph{A}
+{\footnotesize\ttfamily list program.\+peptide.\+A = [$\,$]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{classprogram_1_1peptide_a994ed7cb1479fd7419e26d6a4e35d056}} 
+\index{program\+::peptide@{program\+::peptide}!coord@{coord}}
+\index{coord@{coord}!program\+::peptide@{program\+::peptide}}
+\paragraph{coord}
+{\footnotesize\ttfamily list program.\+peptide.\+coord = [$\,$]\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ program.\+py}\end{DoxyCompactItemize}

@@ -1,0 +1,255 @@
+\subsection{Dokumentacja przestrzeni nazw program}
+\label{namespaceprogram}\index{program@{program}}
+\subsubsection*{Komponenty}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ atom}
+\begin{DoxyCompactList}\small\item\em Atomy. \end{DoxyCompactList}\item 
+class \textbf{ monomer}
+\begin{DoxyCompactList}\small\item\em Monomery. \end{DoxyCompactList}\item 
+class \textbf{ peptide}
+\begin{DoxyCompactList}\small\item\em Peptydy. \end{DoxyCompactList}\item 
+class \textbf{ vector}
+\begin{DoxyCompactList}\small\item\em Wektory w układzie kartezjańskim. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+def \textbf{ transpose} (m)
+\begin{DoxyCompactList}\small\item\em Transpozyjcja macierzy. \end{DoxyCompactList}\item 
+def \textbf{ dihedral\+\_\+angle} (b1, b2, b3)
+\begin{DoxyCompactList}\small\item\em Wyznaczanie kąta torsyjnego. \end{DoxyCompactList}\item 
+def \textbf{ upload\+\_\+data} (\textbf{ table}, \textbf{ l1}, \textbf{ l2}, \textbf{ l3}, \textbf{ l4}, \textbf{ l5}, \textbf{ l7}, \textbf{ l8})
+\item 
+def \textbf{ make\+\_\+output} (peptyd, \textbf{ i}, \textbf{ j}, \textbf{ n})
+\end{DoxyCompactItemize}
+\subsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+list \textbf{ table} = [$\,$]
+\item 
+int \textbf{ number\+\_\+of\+\_\+lines} = 0
+\item 
+dictionary \textbf{ monomers\+\_\+list} = \{\}
+\item 
+list \textbf{ l1} = [$\,$]
+\item 
+list \textbf{ l2} = [$\,$]
+\item 
+list \textbf{ l3} = [$\,$]
+\item 
+list \textbf{ l4} = [$\,$]
+\item 
+list \textbf{ l5} = [$\,$]
+\item 
+int \textbf{ l6} = 0
+\item 
+list \textbf{ l7} = [$\,$]
+\item 
+list \textbf{ l8} = [$\,$]
+\item 
+\textbf{ words} = re.\+split(\char`\"{}\textbackslash{}s+\char`\"{},line.\+strip())
+\item 
+def \textbf{ monomer\+\_\+i} = \textbf{ upload\+\_\+data}(\textbf{ table}, \textbf{ l1}, \textbf{ l2}, \textbf{ l3}, \textbf{ l4}, \textbf{ l5}, \textbf{ l7}, \textbf{ l8})
+\item 
+\textbf{ data} = open(sys.\+argv[1])
+\item 
+string \textbf{ words2} = \char`\"{}\char`\"{}
+\item 
+list \textbf{ table2} = [$\,$]
+\item 
+\textbf{ aa} = \textbf{ peptide}()
+\item 
+\textbf{ f} = open(\textquotesingle{}output.\+pdb\textquotesingle{}, \textquotesingle{}w\textquotesingle{})
+\item 
+int \textbf{ i} = 0
+\item 
+int \textbf{ j} = 0
+\item 
+int \textbf{ n} = 0
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Dokumentacja funkcji}
+\mbox{\label{namespaceprogram_a1a5eb7e0796234b56f3f8aaf1d224e91}} 
+\index{program@{program}!dihedral\+\_\+angle@{dihedral\+\_\+angle}}
+\index{dihedral\+\_\+angle@{dihedral\+\_\+angle}!program@{program}}
+\paragraph{dihedral\+\_\+angle()}
+{\footnotesize\ttfamily def program.\+dihedral\+\_\+angle (\begin{DoxyParamCaption}\item[{}]{b1,  }\item[{}]{b2,  }\item[{}]{b3 }\end{DoxyParamCaption})}
+
+
+
+Wyznaczanie kąta torsyjnego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em b1,b2,b3} & trzy wektory pomiędzy, którymi liczony jest kąt torsyjny \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+wartość kąta torsyjnego 
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Autor}
+Bernadeta Nowosielska 
+\end{DoxyAuthor}
+\mbox{\label{namespaceprogram_aae1836affccc36f44e3567593c8cb8bd}} 
+\index{program@{program}!make\+\_\+output@{make\+\_\+output}}
+\index{make\+\_\+output@{make\+\_\+output}!program@{program}}
+\paragraph{make\+\_\+output()}
+{\footnotesize\ttfamily def program.\+make\+\_\+output (\begin{DoxyParamCaption}\item[{}]{peptyd,  }\item[{}]{i,  }\item[{}]{j,  }\item[{}]{n }\end{DoxyParamCaption})}
+
+\mbox{\label{namespaceprogram_ae54249942e05f849b048953df9d84c04}} 
+\index{program@{program}!transpose@{transpose}}
+\index{transpose@{transpose}!program@{program}}
+\paragraph{transpose()}
+{\footnotesize\ttfamily def program.\+transpose (\begin{DoxyParamCaption}\item[{}]{m }\end{DoxyParamCaption})}
+
+
+
+Transpozyjcja macierzy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em m} & maciwerz, która ma zostać zmieniona \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+macierz transponowana 
+\end{DoxyReturn}
+\begin{DoxyAuthor}{Autor}
+Bernadeta Nowosielska 
+\end{DoxyAuthor}
+\mbox{\label{namespaceprogram_a6255a3e5fb73276a27d53b35a0f6423c}} 
+\index{program@{program}!upload\+\_\+data@{upload\+\_\+data}}
+\index{upload\+\_\+data@{upload\+\_\+data}!program@{program}}
+\paragraph{upload\+\_\+data()}
+{\footnotesize\ttfamily def program.\+upload\+\_\+data (\begin{DoxyParamCaption}\item[{}]{table,  }\item[{}]{l1,  }\item[{}]{l2,  }\item[{}]{l3,  }\item[{}]{l4,  }\item[{}]{l5,  }\item[{}]{l7,  }\item[{}]{l8 }\end{DoxyParamCaption})}
+
+
+
+\subsubsection{Dokumentacja zmiennych}
+\mbox{\label{namespaceprogram_aaac913534cc4f0ac2d38962f6f53f81c}} 
+\index{program@{program}!aa@{aa}}
+\index{aa@{aa}!program@{program}}
+\paragraph{aa}
+{\footnotesize\ttfamily program.\+aa = \textbf{ peptide}()}
+
+\mbox{\label{namespaceprogram_a044b3e27d1a91ad8a3a66ac4f32668f1}} 
+\index{program@{program}!data@{data}}
+\index{data@{data}!program@{program}}
+\paragraph{data}
+{\footnotesize\ttfamily program.\+data = open(sys.\+argv[1])}
+
+\mbox{\label{namespaceprogram_af3cf1336dd6b364a2186dd146e846a4a}} 
+\index{program@{program}!f@{f}}
+\index{f@{f}!program@{program}}
+\paragraph{f}
+{\footnotesize\ttfamily program.\+f = open(\textquotesingle{}output.\+pdb\textquotesingle{}, \textquotesingle{}w\textquotesingle{})}
+
+\mbox{\label{namespaceprogram_ac317d4ad54c6a8161f773f78ed3706df}} 
+\index{program@{program}!i@{i}}
+\index{i@{i}!program@{program}}
+\paragraph{i}
+{\footnotesize\ttfamily int program.\+i = 0}
+
+\mbox{\label{namespaceprogram_a92d03558a515800f73c19c8710295cc5}} 
+\index{program@{program}!j@{j}}
+\index{j@{j}!program@{program}}
+\paragraph{j}
+{\footnotesize\ttfamily int program.\+j = 0}
+
+\mbox{\label{namespaceprogram_a6a6cf9e68362df4d3f9221f3bbaff328}} 
+\index{program@{program}!l1@{l1}}
+\index{l1@{l1}!program@{program}}
+\paragraph{l1}
+{\footnotesize\ttfamily list program.\+l1 = [$\,$]}
+
+\mbox{\label{namespaceprogram_a631ead734881d95594ef2e6b731147d8}} 
+\index{program@{program}!l2@{l2}}
+\index{l2@{l2}!program@{program}}
+\paragraph{l2}
+{\footnotesize\ttfamily list program.\+l2 = [$\,$]}
+
+\mbox{\label{namespaceprogram_aa5ad09e37935612153cdb18c5391925d}} 
+\index{program@{program}!l3@{l3}}
+\index{l3@{l3}!program@{program}}
+\paragraph{l3}
+{\footnotesize\ttfamily list program.\+l3 = [$\,$]}
+
+\mbox{\label{namespaceprogram_af0a43a99aad1062c2c602205ab8fd5a7}} 
+\index{program@{program}!l4@{l4}}
+\index{l4@{l4}!program@{program}}
+\paragraph{l4}
+{\footnotesize\ttfamily list program.\+l4 = [$\,$]}
+
+\mbox{\label{namespaceprogram_abb9e824cbc2cf31332e6b4bfdef5292c}} 
+\index{program@{program}!l5@{l5}}
+\index{l5@{l5}!program@{program}}
+\paragraph{l5}
+{\footnotesize\ttfamily list program.\+l5 = [$\,$]}
+
+\mbox{\label{namespaceprogram_acc31c6aeaa54d2cba5065f2c1b013c60}} 
+\index{program@{program}!l6@{l6}}
+\index{l6@{l6}!program@{program}}
+\paragraph{l6}
+{\footnotesize\ttfamily int program.\+l6 = 0}
+
+\mbox{\label{namespaceprogram_aa7252697ce709732ea4c9d3ba4ac08a0}} 
+\index{program@{program}!l7@{l7}}
+\index{l7@{l7}!program@{program}}
+\paragraph{l7}
+{\footnotesize\ttfamily list program.\+l7 = [$\,$]}
+
+\mbox{\label{namespaceprogram_a2e6990c2778c0d534974ced34c8d7d43}} 
+\index{program@{program}!l8@{l8}}
+\index{l8@{l8}!program@{program}}
+\paragraph{l8}
+{\footnotesize\ttfamily list program.\+l8 = [$\,$]}
+
+\mbox{\label{namespaceprogram_a282e8ffbb5b2791e00ca1d1923c4f889}} 
+\index{program@{program}!monomer\+\_\+i@{monomer\+\_\+i}}
+\index{monomer\+\_\+i@{monomer\+\_\+i}!program@{program}}
+\paragraph{monomer\+\_\+i}
+{\footnotesize\ttfamily def program.\+monomer\+\_\+i = \textbf{ upload\+\_\+data}(\textbf{ table}, \textbf{ l1}, \textbf{ l2}, \textbf{ l3}, \textbf{ l4}, \textbf{ l5}, \textbf{ l7}, \textbf{ l8})}
+
+\mbox{\label{namespaceprogram_a5e61cf96fe09fa76b9a539537c55cfea}} 
+\index{program@{program}!monomers\+\_\+list@{monomers\+\_\+list}}
+\index{monomers\+\_\+list@{monomers\+\_\+list}!program@{program}}
+\paragraph{monomers\+\_\+list}
+{\footnotesize\ttfamily dictionary program.\+monomers\+\_\+list = \{\}}
+
+\mbox{\label{namespaceprogram_abf45047966c69469c1b1ae16dddfd97f}} 
+\index{program@{program}!n@{n}}
+\index{n@{n}!program@{program}}
+\paragraph{n}
+{\footnotesize\ttfamily int program.\+n = 0}
+
+\mbox{\label{namespaceprogram_ae6036ca9fde833c1c16f8f29f393b794}} 
+\index{program@{program}!number\+\_\+of\+\_\+lines@{number\+\_\+of\+\_\+lines}}
+\index{number\+\_\+of\+\_\+lines@{number\+\_\+of\+\_\+lines}!program@{program}}
+\paragraph{number\+\_\+of\+\_\+lines}
+{\footnotesize\ttfamily int program.\+number\+\_\+of\+\_\+lines = 0}
+
+\mbox{\label{namespaceprogram_a6ccdb054d60936fb1dc088f02507e1da}} 
+\index{program@{program}!table@{table}}
+\index{table@{table}!program@{program}}
+\paragraph{table}
+{\footnotesize\ttfamily list program.\+table = [$\,$]}
+
+\mbox{\label{namespaceprogram_aeddcddb2b50f3bd08b9a1cfe2bc932ed}} 
+\index{program@{program}!table2@{table2}}
+\index{table2@{table2}!program@{program}}
+\paragraph{table2}
+{\footnotesize\ttfamily list program.\+table2 = [$\,$]}
+
+\mbox{\label{namespaceprogram_ae7ae5900685c39ab4a7b31b6768880a1}} 
+\index{program@{program}!words@{words}}
+\index{words@{words}!program@{program}}
+\paragraph{words}
+{\footnotesize\ttfamily program.\+words = re.\+split(\char`\"{}\textbackslash{}s+\char`\"{},line.\+strip())}
+
+\mbox{\label{namespaceprogram_a9027654dd9ae29764677e06a8f983752}} 
+\index{program@{program}!words2@{words2}}
+\index{words2@{words2}!program@{program}}
+\paragraph{words2}
+{\footnotesize\ttfamily program.\+words2 = \char`\"{}\char`\"{}}
+

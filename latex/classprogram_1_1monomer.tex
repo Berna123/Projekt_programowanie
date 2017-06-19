@@ -1,0 +1,204 @@
+\subsection{Dokumentacja klasy program.\+monomer}
+\label{classprogram_1_1monomer}\index{program.\+monomer@{program.\+monomer}}
+
+
+Monomery.  
+
+
+\subsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+def \textbf{ \+\_\+\+\_\+init\+\_\+\+\_\+} (\+\_\+\+\_\+self\+\_\+\+\_\+, \textbf{ ID}, noa, atoms, nob, bonds, wazne\+\_\+atomy)
+\begin{DoxyCompactList}\small\item\em Konstuktor. \end{DoxyCompactList}\item 
+def \textbf{ replicate} (\+\_\+\+\_\+self\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Tworzy wierną kopję monomeru. \end{DoxyCompactList}\item 
+def \textbf{ rotate\+\_\+all} (\+\_\+\+\_\+self\+\_\+\+\_\+, m)
+\begin{DoxyCompactList}\small\item\em Obrót wszystkich atomu monomeru. \end{DoxyCompactList}\item 
+def \textbf{ translation\+\_\+all} (\+\_\+\+\_\+self\+\_\+\+\_\+, v)
+\begin{DoxyCompactList}\small\item\em Przesunięcie wszystkich atomów monomeru. \end{DoxyCompactList}\item 
+def \textbf{ system\+\_\+C} (\+\_\+\+\_\+self\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Tworzy macierz układu współrzędnyc na C. \end{DoxyCompactList}\item 
+def \textbf{ system\+\_\+N} (\+\_\+\+\_\+self\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Tworzy macierz układu współrzędnyc na C. \end{DoxyCompactList}\item 
+def \textbf{ remove} (\+\_\+\+\_\+self\+\_\+\+\_\+, \textbf{ ID})
+\begin{DoxyCompactList}\small\item\em Usuwa atom. \end{DoxyCompactList}\item 
+def \textbf{ \+\_\+\+\_\+str\+\_\+\+\_\+} (\+\_\+\+\_\+self\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Pozwala na wydrukowanie monomru. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Statyczne atrybuty publiczne}
+\begin{DoxyCompactItemize}
+\item 
+string \textbf{ ID} = \char`\"{}\char`\"{}
+\item 
+int \textbf{ number\+\_\+of\+\_\+atoms} = 0
+\item 
+int \textbf{ number\+\_\+of\+\_\+bonds} = 0
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Opis szczegółowy}
+Monomery. 
+
+\begin{DoxyAuthor}{Autor}
+Bernadeta Nowosielska 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parametry}
+{\em ID} & nazwa monomeru \\
+\hline
+{\em number\+\_\+of\+\_\+atoms} & liczba atomów w monomerze \\
+\hline
+{\em number\+\_\+of\+\_\+bonds} & liczba wiązań w monomerze \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\label{classprogram_1_1monomer_adafb34b35ea282aff623fdd2e7827aec}} 
+\index{program\+::monomer@{program\+::monomer}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!program\+::monomer@{program\+::monomer}}
+\paragraph{\+\_\+\+\_\+init\+\_\+\+\_\+()}
+{\footnotesize\ttfamily def program.\+monomer.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{ID,  }\item[{}]{noa,  }\item[{}]{atoms,  }\item[{}]{nob,  }\item[{}]{bonds,  }\item[{}]{wazne\+\_\+atomy }\end{DoxyParamCaption})}
+
+
+
+Konstuktor. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em ID} & nazwa \\
+\hline
+{\em noa} & liczba atomów w monomerze \\
+\hline
+{\em atoms} & tablica zawierająca obiekty klasy atom \\
+\hline
+{\em nob} & liczba wiązań w monomerze \\
+\hline
+{\em bonds} & tablica wiązań \\
+\hline
+{\em wazne\+\_\+atomy} & tablica atomów funkcyjnych \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Dokumentacja funkcji składowych}
+\mbox{\label{classprogram_1_1monomer_af8728c4766de6a2c2c296cfb6ada903e}} 
+\index{program\+::monomer@{program\+::monomer}!\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}!program\+::monomer@{program\+::monomer}}
+\paragraph{\+\_\+\+\_\+str\+\_\+\+\_\+()}
+{\footnotesize\ttfamily def program.\+monomer.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Pozwala na wydrukowanie monomru. 
+
+\mbox{\label{classprogram_1_1monomer_acedd3cd4207fa3db432c01d9d1839313}} 
+\index{program\+::monomer@{program\+::monomer}!remove@{remove}}
+\index{remove@{remove}!program\+::monomer@{program\+::monomer}}
+\paragraph{remove()}
+{\footnotesize\ttfamily def program.\+monomer.\+remove (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{ID }\end{DoxyParamCaption})}
+
+
+
+Usuwa atom. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em ID} & ID atomu który będzie usunięty \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classprogram_1_1monomer_a7b20019215ea0e231ecbf09003c5924d}} 
+\index{program\+::monomer@{program\+::monomer}!replicate@{replicate}}
+\index{replicate@{replicate}!program\+::monomer@{program\+::monomer}}
+\paragraph{replicate()}
+{\footnotesize\ttfamily def program.\+monomer.\+replicate (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Tworzy wierną kopję monomeru. 
+
+\mbox{\label{classprogram_1_1monomer_ab2aa195faf2f4df60084d3d4b766641e}} 
+\index{program\+::monomer@{program\+::monomer}!rotate\+\_\+all@{rotate\+\_\+all}}
+\index{rotate\+\_\+all@{rotate\+\_\+all}!program\+::monomer@{program\+::monomer}}
+\paragraph{rotate\+\_\+all()}
+{\footnotesize\ttfamily def program.\+monomer.\+rotate\+\_\+all (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{m }\end{DoxyParamCaption})}
+
+
+
+Obrót wszystkich atomu monomeru. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em m} & macierz obrotu \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classprogram_1_1monomer_a7d031a870249054f59c6a85b270b97a4}} 
+\index{program\+::monomer@{program\+::monomer}!system\+\_\+C@{system\+\_\+C}}
+\index{system\+\_\+C@{system\+\_\+C}!program\+::monomer@{program\+::monomer}}
+\paragraph{system\+\_\+\+C()}
+{\footnotesize\ttfamily def program.\+monomer.\+system\+\_\+C (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Tworzy macierz układu współrzędnyc na C. 
+
+\begin{DoxyReturn}{Zwraca}
+Macierz układu \begin{DoxyVerb}Tworzy macierz układu współrzędnych na karbonylowym atomie węgla. Tak aby oś x znajdowała się na wiązaniu C-OH, a oś y była prostopadła do grupy.
+\end{DoxyVerb}
+ 
+\end{DoxyReturn}
+\mbox{\label{classprogram_1_1monomer_a1889e4f5eeb57a26cc29fb0372dea131}} 
+\index{program\+::monomer@{program\+::monomer}!system\+\_\+N@{system\+\_\+N}}
+\index{system\+\_\+N@{system\+\_\+N}!program\+::monomer@{program\+::monomer}}
+\paragraph{system\+\_\+\+N()}
+{\footnotesize\ttfamily def program.\+monomer.\+system\+\_\+N (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Tworzy macierz układu współrzędnyc na C. 
+
+\begin{DoxyReturn}{Zwraca}
+Macierz układu \begin{DoxyVerb}Tworzy macierz układu współrzędnych na karbonylowym atomie węgla. Tak aby oś x znajdowała się na wiązaniu N-X, a oś y była prostopadła do atomów H i węgla alpha.
+\end{DoxyVerb}
+ 
+\end{DoxyReturn}
+\mbox{\label{classprogram_1_1monomer_a0a1c5332ae16e0ce57bc81746800dafc}} 
+\index{program\+::monomer@{program\+::monomer}!translation\+\_\+all@{translation\+\_\+all}}
+\index{translation\+\_\+all@{translation\+\_\+all}!program\+::monomer@{program\+::monomer}}
+\paragraph{translation\+\_\+all()}
+{\footnotesize\ttfamily def program.\+monomer.\+translation\+\_\+all (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{v }\end{DoxyParamCaption})}
+
+
+
+Przesunięcie wszystkich atomów monomeru. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em v} & wektor, o który następuje przesunięcie \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Dokumentacja atrybutów składowych}
+\mbox{\label{classprogram_1_1monomer_aab4fa0ddb4cf930fee5881428b1b43df}} 
+\index{program\+::monomer@{program\+::monomer}!ID@{ID}}
+\index{ID@{ID}!program\+::monomer@{program\+::monomer}}
+\paragraph{ID}
+{\footnotesize\ttfamily string program.\+monomer.\+ID = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{classprogram_1_1monomer_ac4dfc73496f61b095c307d79c15dd844}} 
+\index{program\+::monomer@{program\+::monomer}!number\+\_\+of\+\_\+atoms@{number\+\_\+of\+\_\+atoms}}
+\index{number\+\_\+of\+\_\+atoms@{number\+\_\+of\+\_\+atoms}!program\+::monomer@{program\+::monomer}}
+\paragraph{number\+\_\+of\+\_\+atoms}
+{\footnotesize\ttfamily int program.\+monomer.\+number\+\_\+of\+\_\+atoms = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{classprogram_1_1monomer_a03c5add1ad992fcd0f53c9c9540b343b}} 
+\index{program\+::monomer@{program\+::monomer}!number\+\_\+of\+\_\+bonds@{number\+\_\+of\+\_\+bonds}}
+\index{number\+\_\+of\+\_\+bonds@{number\+\_\+of\+\_\+bonds}!program\+::monomer@{program\+::monomer}}
+\paragraph{number\+\_\+of\+\_\+bonds}
+{\footnotesize\ttfamily int program.\+monomer.\+number\+\_\+of\+\_\+bonds = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ program.\+py}\end{DoxyCompactItemize}

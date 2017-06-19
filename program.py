@@ -49,54 +49,33 @@ class atom:
     ID=""
     element=""
     znacznik=""
-    ## \brief Konstuktor
-    # \param a,b,c pobierana współrzędne
-    # \param ID, element, znacznik pobierane stringi 
     def __init__(__self__,a,b,c,ID,element, znacznik):
         __self__.x=a
         __self__.y=b
         __self__.z=c
         __self__.ID=ID
         __self__.element=element
-        __self__.znacznik=znacznik
-	
-    ## \brief Iloczyn skalarny
-    # \param p atom lub wektor
-    # \return wynik iloczynu skalarnego		
+        __self__.znacznik=znacznik	
     def scalar_prod(__self__,p):
         s=__self__.x*p.x+__self__.y*p.y+__self__.z*p.z
         return s
-	
-    ## \brief Obrót jednego atomu
-    # \param m macierz obrotu
     def rotate(__self__,m):
-        """ Zmienia wspołrzędne atomu 
-        """
         x=__self__.x
         y=__self__.y
         z=__self__.z
         __self__.x=x*m[0][0]+y*m[0][1]+z*m[0][2]
         __self__.y=x*m[1][0]+y*m[1][1]+z*m[1][2]
         __self__.z=x*m[2][0]+y*m[2][1]+z*m[2][2]
-	
-    ## \brief Przesunięcie atomu 
-    # \param v wektor, o który następuje przesunięcie
     def translation(__self__,v):
-        """ Zmienia wspołrzędne atomu 
-        """
         __self__.x+=v.x
         __self__.y+=v.y
         __self__.z+=v.z
-    ## \brief Iloczyn wektorowy
-	# \param p atom lub wektor
-    # \return obiekt klasy wektor 
     def vector_prod(__self__,p):
         w=vector(0,0,0)
         w.x=__self__.y*p.z-__self__.z*p.y
         w.y=-__self__.x*p.z+__self__.z*p.x
         w.z=__self__.x*p.y-__self__.y*p.x
         return w
-    ## \brief Pozwala na wydrukowanie wektora
     def __str__(__self__):
         return ( '%6s %2s %7.4f %7.4f %7.4f %6s' %(__self__.ID,__self__.element, __self__.x,__self__.y,__self__.z, __self__.znacznik))
 ## \brief Monomery

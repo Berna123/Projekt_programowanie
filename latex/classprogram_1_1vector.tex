@@ -1,0 +1,148 @@
+\subsection{Dokumentacja klasy program.\+vector}
+\label{classprogram_1_1vector}\index{program.\+vector@{program.\+vector}}
+
+
+Wektory w układzie kartezjańskim.  
+
+
+\subsubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+def \textbf{ \+\_\+\+\_\+init\+\_\+\+\_\+} (\+\_\+\+\_\+self\+\_\+\+\_\+, a, b, c)
+\begin{DoxyCompactList}\small\item\em Konstuktor. \end{DoxyCompactList}\item 
+def \textbf{ leng} (\+\_\+\+\_\+self\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Długość wektora. \end{DoxyCompactList}\item 
+def \textbf{ vector\+\_\+prod} (\+\_\+\+\_\+self\+\_\+\+\_\+, p)
+\begin{DoxyCompactList}\small\item\em Iloczyn wektorowy. \end{DoxyCompactList}\item 
+def \textbf{ scalar\+\_\+prod} (\+\_\+\+\_\+self\+\_\+\+\_\+, p)
+\begin{DoxyCompactList}\small\item\em Iloczyn skalarny. \end{DoxyCompactList}\item 
+def \textbf{ \+\_\+\+\_\+str\+\_\+\+\_\+} (\+\_\+\+\_\+self\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Pozwala na wydrukowanie wektora. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Statyczne atrybuty publiczne}
+\begin{DoxyCompactItemize}
+\item 
+int \textbf{ x} = 0
+\item 
+int \textbf{ y} = 0
+\item 
+int \textbf{ z} = 0
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Opis szczegółowy}
+Wektory w układzie kartezjańskim. 
+
+\begin{DoxyAuthor}{Autor}
+Bernadeta Nowosielska 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parametry}
+{\em x,y,z} & wspołrzędne w układzie karteziańskim \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\label{classprogram_1_1vector_a541fba36d145fbe583e8a8dc6d58db4d}} 
+\index{program\+::vector@{program\+::vector}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!program\+::vector@{program\+::vector}}
+\paragraph{\+\_\+\+\_\+init\+\_\+\+\_\+()}
+{\footnotesize\ttfamily def program.\+vector.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{a,  }\item[{}]{b,  }\item[{}]{c }\end{DoxyParamCaption})}
+
+
+
+Konstuktor. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em a,b,c} & pobierane współrzędne \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Dokumentacja funkcji składowych}
+\mbox{\label{classprogram_1_1vector_a05d9e5b8d70eec5ad26b841c3f9c148d}} 
+\index{program\+::vector@{program\+::vector}!\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}!program\+::vector@{program\+::vector}}
+\paragraph{\+\_\+\+\_\+str\+\_\+\+\_\+()}
+{\footnotesize\ttfamily def program.\+vector.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Pozwala na wydrukowanie wektora. 
+
+\mbox{\label{classprogram_1_1vector_a54f0045e9d22ffb4d977ab44e28a18cf}} 
+\index{program\+::vector@{program\+::vector}!leng@{leng}}
+\index{leng@{leng}!program\+::vector@{program\+::vector}}
+\paragraph{leng()}
+{\footnotesize\ttfamily def program.\+vector.\+leng (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Długość wektora. 
+
+\begin{DoxyReturn}{Zwraca}
+długość wekotora 
+\end{DoxyReturn}
+\mbox{\label{classprogram_1_1vector_a0dc5c2b9fbc2274a5cb2df6959e64ba9}} 
+\index{program\+::vector@{program\+::vector}!scalar\+\_\+prod@{scalar\+\_\+prod}}
+\index{scalar\+\_\+prod@{scalar\+\_\+prod}!program\+::vector@{program\+::vector}}
+\paragraph{scalar\+\_\+prod()}
+{\footnotesize\ttfamily def program.\+vector.\+scalar\+\_\+prod (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{p }\end{DoxyParamCaption})}
+
+
+
+Iloczyn skalarny. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em p} & atom lub wektor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+wynik iloczynu skalarnego 
+\end{DoxyReturn}
+\mbox{\label{classprogram_1_1vector_a96e4f8b560b286ddd5a7ae26d76adbd5}} 
+\index{program\+::vector@{program\+::vector}!vector\+\_\+prod@{vector\+\_\+prod}}
+\index{vector\+\_\+prod@{vector\+\_\+prod}!program\+::vector@{program\+::vector}}
+\paragraph{vector\+\_\+prod()}
+{\footnotesize\ttfamily def program.\+vector.\+vector\+\_\+prod (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{p }\end{DoxyParamCaption})}
+
+
+
+Iloczyn wektorowy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em p} & atom lub wektor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+obiekt klasy wektor 
+\end{DoxyReturn}
+
+
+\subsubsection{Dokumentacja atrybutów składowych}
+\mbox{\label{classprogram_1_1vector_a8e8d3279e72898c00c453b3a038bf7f3}} 
+\index{program\+::vector@{program\+::vector}!x@{x}}
+\index{x@{x}!program\+::vector@{program\+::vector}}
+\paragraph{x}
+{\footnotesize\ttfamily int program.\+vector.\+x = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{classprogram_1_1vector_a011d4c6e53686a99dcf935948b47b9a7}} 
+\index{program\+::vector@{program\+::vector}!y@{y}}
+\index{y@{y}!program\+::vector@{program\+::vector}}
+\paragraph{y}
+{\footnotesize\ttfamily int program.\+vector.\+y = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{classprogram_1_1vector_a5026a54da2bf711a00851846800aa294}} 
+\index{program\+::vector@{program\+::vector}!z@{z}}
+\index{z@{z}!program\+::vector@{program\+::vector}}
+\paragraph{z}
+{\footnotesize\ttfamily int program.\+vector.\+z = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+\textbf{ program.\+py}\end{DoxyCompactItemize}

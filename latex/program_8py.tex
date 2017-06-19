@@ -1,0 +1,74 @@
+\subsection{Dokumentacja pliku program.\+py}
+\label{program_8py}\index{program.\+py@{program.\+py}}
+\subsubsection*{Komponenty}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ program.\+vector}
+\begin{DoxyCompactList}\small\item\em Wektory w układzie kartezjańskim. \end{DoxyCompactList}\item 
+class \textbf{ program.\+atom}
+\begin{DoxyCompactList}\small\item\em Atomy. \end{DoxyCompactList}\item 
+class \textbf{ program.\+monomer}
+\begin{DoxyCompactList}\small\item\em Monomery. \end{DoxyCompactList}\item 
+class \textbf{ program.\+peptide}
+\begin{DoxyCompactList}\small\item\em Peptydy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Przestrzenie nazw}
+\begin{DoxyCompactItemize}
+\item 
+ \textbf{ program}
+\end{DoxyCompactItemize}
+\subsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+def \textbf{ program.\+transpose} (m)
+\begin{DoxyCompactList}\small\item\em Transpozyjcja macierzy. \end{DoxyCompactList}\item 
+def \textbf{ program.\+dihedral\+\_\+angle} (b1, b2, b3)
+\begin{DoxyCompactList}\small\item\em Wyznaczanie kąta torsyjnego. \end{DoxyCompactList}\item 
+def \textbf{ program.\+upload\+\_\+data} (table, l1, l2, l3, l4, l5, l7, l8)
+\item 
+def \textbf{ program.\+make\+\_\+output} (peptyd, i, j, n)
+\end{DoxyCompactItemize}
+\subsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+list \textbf{ program.\+table} = [$\,$]
+\item 
+int \textbf{ program.\+number\+\_\+of\+\_\+lines} = 0
+\item 
+dictionary \textbf{ program.\+monomers\+\_\+list} = \{\}
+\item 
+list \textbf{ program.\+l1} = [$\,$]
+\item 
+list \textbf{ program.\+l2} = [$\,$]
+\item 
+list \textbf{ program.\+l3} = [$\,$]
+\item 
+list \textbf{ program.\+l4} = [$\,$]
+\item 
+list \textbf{ program.\+l5} = [$\,$]
+\item 
+int \textbf{ program.\+l6} = 0
+\item 
+list \textbf{ program.\+l7} = [$\,$]
+\item 
+list \textbf{ program.\+l8} = [$\,$]
+\item 
+\textbf{ program.\+words} = re.\+split(\char`\"{}\textbackslash{}s+\char`\"{},line.\+strip())
+\item 
+def \textbf{ program.\+monomer\+\_\+i} = upload\+\_\+data(table, l1, l2, l3, l4, l5, l7, l8)
+\item 
+\textbf{ program.\+data} = open(sys.\+argv[1])
+\item 
+string \textbf{ program.\+words2} = \char`\"{}\char`\"{}
+\item 
+list \textbf{ program.\+table2} = [$\,$]
+\item 
+\textbf{ program.\+aa} = peptide()
+\item 
+\textbf{ program.\+f} = open(\textquotesingle{}output.\+pdb\textquotesingle{}, \textquotesingle{}w\textquotesingle{})
+\item 
+int \textbf{ program.\+i} = 0
+\item 
+int \textbf{ program.\+j} = 0
+\item 
+int \textbf{ program.\+n} = 0
+\end{DoxyCompactItemize}
