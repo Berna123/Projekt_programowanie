@@ -18,12 +18,16 @@ def \textbf{ transpose} (m)
 \begin{DoxyCompactList}\small\item\em Transpozyjcja macierzy. \end{DoxyCompactList}\item 
 def \textbf{ dihedral\+\_\+angle} (b1, b2, b3)
 \begin{DoxyCompactList}\small\item\em Wyznaczanie kąta torsyjnego. \end{DoxyCompactList}\item 
-def \textbf{ upload\+\_\+data} (\textbf{ table}, \textbf{ l1}, \textbf{ l2}, \textbf{ l3}, \textbf{ l4}, \textbf{ l5}, \textbf{ l7}, \textbf{ l8})
-\item 
-def \textbf{ make\+\_\+output} (peptyd, \textbf{ i}, \textbf{ j}, \textbf{ n})
-\end{DoxyCompactItemize}
+def \textbf{ upload\+\_\+data} (\textbf{ table})
+\begin{DoxyCompactList}\small\item\em Szuka atomow i wiązań istotnych dla tworzenia wiązania. \end{DoxyCompactList}\item 
+def \textbf{ make\+\_\+output} (peptyd, \textbf{ i}, j, \textbf{ n})
+\begin{DoxyCompactList}\small\item\em Tworzy plik w formacie pdb. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Zmienne}
 \begin{DoxyCompactItemize}
+\item 
+\textbf{ file} = open(\textquotesingle{}Components-\/pub.\+cif\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Tworzy monomery białkowe. \end{DoxyCompactList}\item 
+int \textbf{ i} = 0
 \item 
 list \textbf{ table} = [$\,$]
 \item 
@@ -31,28 +35,12 @@ int \textbf{ number\+\_\+of\+\_\+lines} = 0
 \item 
 dictionary \textbf{ monomers\+\_\+list} = \{\}
 \item 
-list \textbf{ l1} = [$\,$]
-\item 
-list \textbf{ l2} = [$\,$]
-\item 
-list \textbf{ l3} = [$\,$]
-\item 
-list \textbf{ l4} = [$\,$]
-\item 
-list \textbf{ l5} = [$\,$]
-\item 
-int \textbf{ l6} = 0
-\item 
-list \textbf{ l7} = [$\,$]
-\item 
-list \textbf{ l8} = [$\,$]
-\item 
 \textbf{ words} = re.\+split(\char`\"{}\textbackslash{}s+\char`\"{},line.\+strip())
 \item 
-def \textbf{ monomer\+\_\+i} = \textbf{ upload\+\_\+data}(\textbf{ table}, \textbf{ l1}, \textbf{ l2}, \textbf{ l3}, \textbf{ l4}, \textbf{ l5}, \textbf{ l7}, \textbf{ l8})
+def \textbf{ monomer\+\_\+i} = \textbf{ upload\+\_\+data}(\textbf{ table})
 \item 
 \textbf{ data} = open(sys.\+argv[1])
-\item 
+\begin{DoxyCompactList}\small\item\em Tworzy poptyd o zadanych kątach omega, fi, psi. \end{DoxyCompactList}\item 
 string \textbf{ words2} = \char`\"{}\char`\"{}
 \item 
 list \textbf{ table2} = [$\,$]
@@ -60,11 +48,7 @@ list \textbf{ table2} = [$\,$]
 \textbf{ aa} = \textbf{ peptide}()
 \item 
 \textbf{ f} = open(\textquotesingle{}output.\+pdb\textquotesingle{}, \textquotesingle{}w\textquotesingle{})
-\item 
-int \textbf{ i} = 0
-\item 
-int \textbf{ j} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Drukuje stworzony peptyd do pliku output.\+pdb. \end{DoxyCompactList}\item 
 int \textbf{ n} = 0
 \end{DoxyCompactItemize}
 
@@ -97,6 +81,24 @@ Bernadeta Nowosielska
 \paragraph{make\+\_\+output()}
 {\footnotesize\ttfamily def program.\+make\+\_\+output (\begin{DoxyParamCaption}\item[{}]{peptyd,  }\item[{}]{i,  }\item[{}]{j,  }\item[{}]{n }\end{DoxyParamCaption})}
 
+
+
+Tworzy plik w formacie pdb. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em peptyd} & obiekt klasy peptyd -\/ gotowy produkt łączenia aminokwasow \\
+\hline
+{\em i} & ilosć aminokwasow w peptydzie \\
+\hline
+{\em j} & ilosć atomow w kolejnych aminokwasach \\
+\hline
+{\em n} & numery porządkowe kolejnych aminokwasow \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Autor}
+Barbara Gruza 
+\end{DoxyAuthor}
 \mbox{\label{namespaceprogram_ae54249942e05f849b048953df9d84c04}} 
 \index{program@{program}!transpose@{transpose}}
 \index{transpose@{transpose}!program@{program}}
@@ -118,12 +120,24 @@ macierz transponowana
 \begin{DoxyAuthor}{Autor}
 Bernadeta Nowosielska 
 \end{DoxyAuthor}
-\mbox{\label{namespaceprogram_a6255a3e5fb73276a27d53b35a0f6423c}} 
+\mbox{\label{namespaceprogram_a6916e63ac5b44ed1b9a69a3bcae5575e}} 
 \index{program@{program}!upload\+\_\+data@{upload\+\_\+data}}
 \index{upload\+\_\+data@{upload\+\_\+data}!program@{program}}
 \paragraph{upload\+\_\+data()}
-{\footnotesize\ttfamily def program.\+upload\+\_\+data (\begin{DoxyParamCaption}\item[{}]{table,  }\item[{}]{l1,  }\item[{}]{l2,  }\item[{}]{l3,  }\item[{}]{l4,  }\item[{}]{l5,  }\item[{}]{l7,  }\item[{}]{l8 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily def program.\+upload\+\_\+data (\begin{DoxyParamCaption}\item[{}]{table }\end{DoxyParamCaption})}
 
+
+
+Szuka atomow i wiązań istotnych dla tworzenia wiązania. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em table} & tablica z danymi wczytanymi z pliku cif \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+obiekty klady monomer 
+\end{DoxyReturn}
 
 
 \subsubsection{Dokumentacja zmiennych}
@@ -139,77 +153,41 @@ Bernadeta Nowosielska
 \paragraph{data}
 {\footnotesize\ttfamily program.\+data = open(sys.\+argv[1])}
 
-\mbox{\label{namespaceprogram_af3cf1336dd6b364a2186dd146e846a4a}} 
+
+
+Tworzy poptyd o zadanych kątach omega, fi, psi. 
+
+Program wczytuje dane z pliku data.\+txt. W pliku wejciowym w pierwszej kolumnie musi znajdować się trzyliterowy kod monomeru. W kolejnych trzech kolumnach mogą znajdować się wartosci kątow omega, fi, psi (w takiej kolejnosci) podane w stopniach. Jesli liczba kolumn w pliku jest rożna od 4 (plik nie zawiera dokladnie trzech wartosci kątow), zostają automatycznie ustalone następujące wartosci\+: omega=180 fi=(-\/60) psi=(-\/45) /author Barbara Gruza \mbox{\label{namespaceprogram_af3cf1336dd6b364a2186dd146e846a4a}} 
 \index{program@{program}!f@{f}}
 \index{f@{f}!program@{program}}
 \paragraph{f}
 {\footnotesize\ttfamily program.\+f = open(\textquotesingle{}output.\+pdb\textquotesingle{}, \textquotesingle{}w\textquotesingle{})}
 
-\mbox{\label{namespaceprogram_ac317d4ad54c6a8161f773f78ed3706df}} 
+
+
+Drukuje stworzony peptyd do pliku output.\+pdb. 
+
+Korzystając z funkcji make\+\_\+output tworzy plik zawierający stworzony obiekt klasy poptyd w formacie .pdb /author Barbara Gruza \mbox{\label{namespaceprogram_a8e2fe534c74d569fa181e0f2a6ff6440}} 
+\index{program@{program}!file@{file}}
+\index{file@{file}!program@{program}}
+\paragraph{file}
+{\footnotesize\ttfamily program.\+file = open(\textquotesingle{}Components-\/pub.\+cif\textquotesingle{})}
+
+
+
+Tworzy monomery białkowe. 
+
+Program wczytuje dane z pliku Components-\/pub.\+cif do tablicy \textquotesingle{}table\textquotesingle{}. Wybiera L-\/peptydy (oraz glicynę). Korzystając z funkcji \textquotesingle{}upload\+\_\+data\textquotesingle{} tworzy listę obiektow klasy monomer. Jesli monomer nie zawiera poprawnie zdefiniowanych nazw oraz wspołrzędnych atomow grup aminowej, karboksylowej oraz węgla alfa nie zostanie załadowany do tablicy /author Barbara Gruza \mbox{\label{namespaceprogram_ac317d4ad54c6a8161f773f78ed3706df}} 
 \index{program@{program}!i@{i}}
 \index{i@{i}!program@{program}}
 \paragraph{i}
 {\footnotesize\ttfamily int program.\+i = 0}
 
-\mbox{\label{namespaceprogram_a92d03558a515800f73c19c8710295cc5}} 
-\index{program@{program}!j@{j}}
-\index{j@{j}!program@{program}}
-\paragraph{j}
-{\footnotesize\ttfamily int program.\+j = 0}
-
-\mbox{\label{namespaceprogram_a6a6cf9e68362df4d3f9221f3bbaff328}} 
-\index{program@{program}!l1@{l1}}
-\index{l1@{l1}!program@{program}}
-\paragraph{l1}
-{\footnotesize\ttfamily list program.\+l1 = [$\,$]}
-
-\mbox{\label{namespaceprogram_a631ead734881d95594ef2e6b731147d8}} 
-\index{program@{program}!l2@{l2}}
-\index{l2@{l2}!program@{program}}
-\paragraph{l2}
-{\footnotesize\ttfamily list program.\+l2 = [$\,$]}
-
-\mbox{\label{namespaceprogram_aa5ad09e37935612153cdb18c5391925d}} 
-\index{program@{program}!l3@{l3}}
-\index{l3@{l3}!program@{program}}
-\paragraph{l3}
-{\footnotesize\ttfamily list program.\+l3 = [$\,$]}
-
-\mbox{\label{namespaceprogram_af0a43a99aad1062c2c602205ab8fd5a7}} 
-\index{program@{program}!l4@{l4}}
-\index{l4@{l4}!program@{program}}
-\paragraph{l4}
-{\footnotesize\ttfamily list program.\+l4 = [$\,$]}
-
-\mbox{\label{namespaceprogram_abb9e824cbc2cf31332e6b4bfdef5292c}} 
-\index{program@{program}!l5@{l5}}
-\index{l5@{l5}!program@{program}}
-\paragraph{l5}
-{\footnotesize\ttfamily list program.\+l5 = [$\,$]}
-
-\mbox{\label{namespaceprogram_acc31c6aeaa54d2cba5065f2c1b013c60}} 
-\index{program@{program}!l6@{l6}}
-\index{l6@{l6}!program@{program}}
-\paragraph{l6}
-{\footnotesize\ttfamily int program.\+l6 = 0}
-
-\mbox{\label{namespaceprogram_aa7252697ce709732ea4c9d3ba4ac08a0}} 
-\index{program@{program}!l7@{l7}}
-\index{l7@{l7}!program@{program}}
-\paragraph{l7}
-{\footnotesize\ttfamily list program.\+l7 = [$\,$]}
-
-\mbox{\label{namespaceprogram_a2e6990c2778c0d534974ced34c8d7d43}} 
-\index{program@{program}!l8@{l8}}
-\index{l8@{l8}!program@{program}}
-\paragraph{l8}
-{\footnotesize\ttfamily list program.\+l8 = [$\,$]}
-
 \mbox{\label{namespaceprogram_a282e8ffbb5b2791e00ca1d1923c4f889}} 
 \index{program@{program}!monomer\+\_\+i@{monomer\+\_\+i}}
 \index{monomer\+\_\+i@{monomer\+\_\+i}!program@{program}}
 \paragraph{monomer\+\_\+i}
-{\footnotesize\ttfamily def program.\+monomer\+\_\+i = \textbf{ upload\+\_\+data}(\textbf{ table}, \textbf{ l1}, \textbf{ l2}, \textbf{ l3}, \textbf{ l4}, \textbf{ l5}, \textbf{ l7}, \textbf{ l8})}
+{\footnotesize\ttfamily def program.\+monomer\+\_\+i = \textbf{ upload\+\_\+data}(\textbf{ table})}
 
 \mbox{\label{namespaceprogram_a5e61cf96fe09fa76b9a539537c55cfea}} 
 \index{program@{program}!monomers\+\_\+list@{monomers\+\_\+list}}

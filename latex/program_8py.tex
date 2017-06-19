@@ -23,12 +23,16 @@ def \textbf{ program.\+transpose} (m)
 \begin{DoxyCompactList}\small\item\em Transpozyjcja macierzy. \end{DoxyCompactList}\item 
 def \textbf{ program.\+dihedral\+\_\+angle} (b1, b2, b3)
 \begin{DoxyCompactList}\small\item\em Wyznaczanie kąta torsyjnego. \end{DoxyCompactList}\item 
-def \textbf{ program.\+upload\+\_\+data} (table, l1, l2, l3, l4, l5, l7, l8)
-\item 
+def \textbf{ program.\+upload\+\_\+data} (table)
+\begin{DoxyCompactList}\small\item\em Szuka atomow i wiązań istotnych dla tworzenia wiązania. \end{DoxyCompactList}\item 
 def \textbf{ program.\+make\+\_\+output} (peptyd, i, j, n)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Tworzy plik w formacie pdb. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Zmienne}
 \begin{DoxyCompactItemize}
+\item 
+\textbf{ program.\+file} = open(\textquotesingle{}Components-\/pub.\+cif\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Tworzy monomery białkowe. \end{DoxyCompactList}\item 
+int \textbf{ program.\+i} = 0
 \item 
 list \textbf{ program.\+table} = [$\,$]
 \item 
@@ -36,28 +40,12 @@ int \textbf{ program.\+number\+\_\+of\+\_\+lines} = 0
 \item 
 dictionary \textbf{ program.\+monomers\+\_\+list} = \{\}
 \item 
-list \textbf{ program.\+l1} = [$\,$]
-\item 
-list \textbf{ program.\+l2} = [$\,$]
-\item 
-list \textbf{ program.\+l3} = [$\,$]
-\item 
-list \textbf{ program.\+l4} = [$\,$]
-\item 
-list \textbf{ program.\+l5} = [$\,$]
-\item 
-int \textbf{ program.\+l6} = 0
-\item 
-list \textbf{ program.\+l7} = [$\,$]
-\item 
-list \textbf{ program.\+l8} = [$\,$]
-\item 
 \textbf{ program.\+words} = re.\+split(\char`\"{}\textbackslash{}s+\char`\"{},line.\+strip())
 \item 
-def \textbf{ program.\+monomer\+\_\+i} = upload\+\_\+data(table, l1, l2, l3, l4, l5, l7, l8)
+def \textbf{ program.\+monomer\+\_\+i} = upload\+\_\+data(table)
 \item 
 \textbf{ program.\+data} = open(sys.\+argv[1])
-\item 
+\begin{DoxyCompactList}\small\item\em Tworzy poptyd o zadanych kątach omega, fi, psi. \end{DoxyCompactList}\item 
 string \textbf{ program.\+words2} = \char`\"{}\char`\"{}
 \item 
 list \textbf{ program.\+table2} = [$\,$]
@@ -65,10 +53,6 @@ list \textbf{ program.\+table2} = [$\,$]
 \textbf{ program.\+aa} = peptide()
 \item 
 \textbf{ program.\+f} = open(\textquotesingle{}output.\+pdb\textquotesingle{}, \textquotesingle{}w\textquotesingle{})
-\item 
-int \textbf{ program.\+i} = 0
-\item 
-int \textbf{ program.\+j} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Drukuje stworzony peptyd do pliku output.\+pdb. \end{DoxyCompactList}\item 
 int \textbf{ program.\+n} = 0
 \end{DoxyCompactItemize}

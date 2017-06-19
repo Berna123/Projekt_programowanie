@@ -9,17 +9,17 @@ Atomy.
 \begin{DoxyCompactItemize}
 \item 
 def \textbf{ \+\_\+\+\_\+init\+\_\+\+\_\+} (\+\_\+\+\_\+self\+\_\+\+\_\+, a, b, c, \textbf{ ID}, \textbf{ element}, \textbf{ znacznik})
-\item 
+\begin{DoxyCompactList}\small\item\em Konstuktor. \end{DoxyCompactList}\item 
 def \textbf{ scalar\+\_\+prod} (\+\_\+\+\_\+self\+\_\+\+\_\+, p)
-\item 
+\begin{DoxyCompactList}\small\item\em Iloczyn skalarny. \end{DoxyCompactList}\item 
 def \textbf{ rotate} (\+\_\+\+\_\+self\+\_\+\+\_\+, m)
-\item 
+\begin{DoxyCompactList}\small\item\em Obrót. \end{DoxyCompactList}\item 
 def \textbf{ translation} (\+\_\+\+\_\+self\+\_\+\+\_\+, v)
-\item 
+\begin{DoxyCompactList}\small\item\em Przesunięcie. \end{DoxyCompactList}\item 
 def \textbf{ vector\+\_\+prod} (\+\_\+\+\_\+self\+\_\+\+\_\+, p)
-\item 
+\begin{DoxyCompactList}\small\item\em Iloczyn wektorowy. \end{DoxyCompactList}\item 
 def \textbf{ \+\_\+\+\_\+str\+\_\+\+\_\+} (\+\_\+\+\_\+self\+\_\+\+\_\+)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pozwala na wydrukowanie atomu. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Statyczne atrybuty publiczne}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,7 +45,7 @@ Bernadeta Nowosielska
 \end{DoxyAuthor}
 
 \begin{DoxyParams}{Parametry}
-{\em x,y,z} & współrzędne w układzie kartezjanskim \\
+{\em x,y,z} & współrzędne w układzie kartezjańskim \\
 \hline
 {\em ID} & unikalny identyfikator \\
 \hline
@@ -65,6 +65,21 @@ Bernadeta Nowosielska
 
 
 
+Konstuktor. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em a,b,c} & współrzędne \\
+\hline
+{\em ID} & unikalny identyfikator \\
+\hline
+{\em element} & pierwiastek chemiczny \\
+\hline
+{\em znacznik} & dla atomów funkcyjnych \\
+\hline
+\end{DoxyParams}
+
+
 \subsubsection{Dokumentacja funkcji składowych}
 \mbox{\label{classprogram_1_1atom_aa12f02763d2815a575e247b55e26c196}} 
 \index{program\+::atom@{program\+::atom}!\+\_\+\+\_\+str\+\_\+\+\_\+@{\+\_\+\+\_\+str\+\_\+\+\_\+}}
@@ -72,30 +87,76 @@ Bernadeta Nowosielska
 \paragraph{\+\_\+\+\_\+str\+\_\+\+\_\+()}
 {\footnotesize\ttfamily def program.\+atom.\+\_\+\+\_\+str\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+ }\end{DoxyParamCaption})}
 
+
+
+Pozwala na wydrukowanie atomu. 
+
 \mbox{\label{classprogram_1_1atom_a9b68760818cd15c7231caeafcc36b841}} 
 \index{program\+::atom@{program\+::atom}!rotate@{rotate}}
 \index{rotate@{rotate}!program\+::atom@{program\+::atom}}
 \paragraph{rotate()}
 {\footnotesize\ttfamily def program.\+atom.\+rotate (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{m }\end{DoxyParamCaption})}
 
-\mbox{\label{classprogram_1_1atom_a1863fcbd5815b422685226941933bf58}} 
+
+
+Obrót. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em m} & macierz obrotu\\
+\hline
+\end{DoxyParams}
+Zmienia współrzędne atomu \mbox{\label{classprogram_1_1atom_a1863fcbd5815b422685226941933bf58}} 
 \index{program\+::atom@{program\+::atom}!scalar\+\_\+prod@{scalar\+\_\+prod}}
 \index{scalar\+\_\+prod@{scalar\+\_\+prod}!program\+::atom@{program\+::atom}}
 \paragraph{scalar\+\_\+prod()}
 {\footnotesize\ttfamily def program.\+atom.\+scalar\+\_\+prod (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{p }\end{DoxyParamCaption})}
 
+
+
+Iloczyn skalarny. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em p} & atom lub wektor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+wynik iloczynu skalarnego 
+\end{DoxyReturn}
 \mbox{\label{classprogram_1_1atom_ab8c1cb9e73897ef7413e183a9986f744}} 
 \index{program\+::atom@{program\+::atom}!translation@{translation}}
 \index{translation@{translation}!program\+::atom@{program\+::atom}}
 \paragraph{translation()}
 {\footnotesize\ttfamily def program.\+atom.\+translation (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{v }\end{DoxyParamCaption})}
 
-\mbox{\label{classprogram_1_1atom_ae8937a9e9eb716fe83cac0b0cd302a05}} 
+
+
+Przesunięcie. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em v} & wektor\\
+\hline
+\end{DoxyParams}
+Zmienia wspołrzędne atomu \mbox{\label{classprogram_1_1atom_ae8937a9e9eb716fe83cac0b0cd302a05}} 
 \index{program\+::atom@{program\+::atom}!vector\+\_\+prod@{vector\+\_\+prod}}
 \index{vector\+\_\+prod@{vector\+\_\+prod}!program\+::atom@{program\+::atom}}
 \paragraph{vector\+\_\+prod()}
 {\footnotesize\ttfamily def program.\+atom.\+vector\+\_\+prod (\begin{DoxyParamCaption}\item[{}]{\+\_\+\+\_\+self\+\_\+\+\_\+,  }\item[{}]{p }\end{DoxyParamCaption})}
 
+
+
+Iloczyn wektorowy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em p} & atom lub wektor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+obiekt klasy wekotr będący wynikem iloczynu wektorowego 
+\end{DoxyReturn}
 
 
 \subsubsection{Dokumentacja atrybutów składowych}

@@ -1,11 +1,7 @@
 var searchData=
 [
-  ['l1',['l1',['../namespaceprogram.html#a6a6cf9e68362df4d3f9221f3bbaff328',1,'program']]],
-  ['l2',['l2',['../namespaceprogram.html#a631ead734881d95594ef2e6b731147d8',1,'program']]],
-  ['l3',['l3',['../namespaceprogram.html#aa5ad09e37935612153cdb18c5391925d',1,'program']]],
-  ['l4',['l4',['../namespaceprogram.html#af0a43a99aad1062c2c602205ab8fd5a7',1,'program']]],
-  ['l5',['l5',['../namespaceprogram.html#abb9e824cbc2cf31332e6b4bfdef5292c',1,'program']]],
-  ['l6',['l6',['../namespaceprogram.html#acc31c6aeaa54d2cba5065f2c1b013c60',1,'program']]],
-  ['l7',['l7',['../namespaceprogram.html#aa7252697ce709732ea4c9d3ba4ac08a0',1,'program']]],
-  ['l8',['l8',['../namespaceprogram.html#a2e6990c2778c0d534974ced34c8d7d43',1,'program']]]
+  ['n',['n',['../namespaceprogram.html#abf45047966c69469c1b1ae16dddfd97f',1,'program']]],
+  ['number_5fof_5fatoms',['number_of_atoms',['../classprogram_1_1monomer.html#ac4dfc73496f61b095c307d79c15dd844',1,'program::monomer']]],
+  ['number_5fof_5fbonds',['number_of_bonds',['../classprogram_1_1monomer.html#a03c5add1ad992fcd0f53c9c9540b343b',1,'program::monomer']]],
+  ['number_5fof_5flines',['number_of_lines',['../namespaceprogram.html#ae6036ca9fde833c1c16f8f29f393b794',1,'program']]]
 ];

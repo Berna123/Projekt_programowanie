@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['words',['words',['../namespaceprogram.html#ae7ae5900685c39ab4a7b31b6768880a1',1,'program']]],
-  ['words2',['words2',['../namespaceprogram.html#a9027654dd9ae29764677e06a8f983752',1,'program']]]
+  ['y',['y',['../classprogram_1_1vector.html#a011d4c6e53686a99dcf935948b47b9a7',1,'program.vector.y()'],['../classprogram_1_1atom.html#aecd799b1f1cbb084dbc98af69aa2163a',1,'program.atom.y()']]]
 ];

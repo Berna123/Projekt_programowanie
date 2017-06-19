@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.9.26)  16 JUN 2017 20:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.9.26)  19 JUN 2017 22:46
 entering extended mode
 **./refman.tex
 (refman.tex
@@ -1150,7 +1150,6 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 10.79993pt on input line 1.
 )
-(annotated.tex
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 12.22644pt.
@@ -1158,15 +1157,10 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 3.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 126.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 6.29996pt on input line 3.
-[1]
-
-LaTeX Warning: Reference `classprogram_1_1atom' on page 2 undefined on input li
-ne 3.
-
-) (files.tex) (namespaceprogram.tex
+(Font)              scaled to size 6.29996pt on input line 126.
+[1] (annotated.tex) (files.tex) (namespaceprogram.tex
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 8.99994pt on input line 3.
 LaTeX Font Info:    Try loading font information for TS1+phv on input line 6.
@@ -1190,33 +1184,42 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [2]
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 51.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 6.29996pt on input line 51.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 6.29996pt on input line 76.
+(Font)              scaled to size 6.29996pt on input line 60.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 77.
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 77.
+(Font)              scaled to size 7.19995pt on input line 61.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 61.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd"
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 77.
- [3]
-Underfull \hbox (badness 10000) detected at line 88
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 61.
+
+Underfull \hbox (badness 10000) detected at line 72
+[][][]
+ []
+
+[3]
+Underfull \hbox (badness 10000) detected at line 75
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 91
+Underfull \hbox (badness 10000) detected at line 99
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 115
+Underfull \hbox (badness 10000) detected at line 117
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 118
+Underfull \hbox (badness 10000) detected at line 120
 [][][]
  []
 
@@ -1227,50 +1230,58 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [4]
-LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <8> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 134.
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 146.
+Underfull \hbox (badness 10000) detected at line 138
+[][][]
+ []
 
- ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ts1pcr.fd"
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <8> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 148.
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 164.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ts1pcr.fd"
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 )
-LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 164.
-LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 164.
- [5]
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <7> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 212.
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 190.
+ [5]
+LaTeX Font Info:    External font `plex10' loaded for size
+(Font)              <8> on input line 214.
+LaTeX Font Info:    External font `plex10' loaded for size
+(Font)              <6> on input line 214.
 )
+(classprogram_1_1atom.tex
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 12.22644pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[6] (classprogram_1_1atom.tex
+[6]
 Underfull \hbox (badness 10000) detected at line 43
 [][][]
  []
 
 [7]
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 3 on input line 56.
-
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 64.
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 12.22644pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[8]) (classprogram_1_1monomer.tex [9]
-Underfull \hbox (badness 10000) detected at line 41
+[8]
+Underfull \hbox (badness 10000) detected at line 124
 [][][]
  []
 
+
+Underfull \hbox (badness 10000) detected at line 157
+[][][]
+ []
+
+[9]) (classprogram_1_1monomer.tex
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 12.22644pt.
@@ -1278,47 +1289,11 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [10]
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 4 on input line 52.
-
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 5 on input line 80.
+Underfull \hbox (badness 10000) detected at line 41
+[][][]
+ []
 
 [11]
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 6 on input line 108.
-
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 7 on input line 133.
-
-
-Underfull \hbox (badness 10000) detected at line 144
-[][][]
- []
-
-
-Overfull \hbox (263.26994pt too wide) in paragraph at lines 145--145
- []\T1/pcr/m/n/8 Tworzy macierz ukªadu wspóªrz¦dnych na karbonylowym atomie w¦g
-la. Tak aby o± x znajdowaªa si¦ na wi¡zaniu C-OH, a o± y byªa prostopadªa do gr
-upy. 
- []
-
-
-Underfull \hbox (badness 10000) detected at line 159
-[][][]
- []
-
-
-Overfull \hbox (340.06999pt too wide) in paragraph at lines 160--160
- []\T1/pcr/m/n/8 Tworzy macierz ukªadu wspóªrz¦dnych na karbonylowym atomie w¦g
-la. Tak aby o± x znajdowaªa si¦ na wi¡zaniu N-X, a o± y byªa prostopadªa do ato
-mów H i w¦gla alpha. 
- []
-
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 12.22644pt.
@@ -1326,22 +1301,19 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [12]
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 8 on input line 178.
-
-) (classprogram_1_1peptide.tex [13]
-Underfull \hbox (badness 10000) detected at line 31
+Underfull \hbox (badness 10000) detected at line 144
 [][][]
  []
 
 
-Package longtable Warning: Column widths have changed
-(longtable)                in table 9 on input line 38.
+Underfull \hbox (badness 10000) detected at line 160
+[][][]
+ []
 
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 10 on input line 68.
+[13]) (classprogram_1_1peptide.tex
+Underfull \hbox (badness 10000) detected at line 31
+[][][]
+ []
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1354,23 +1326,7 @@ Overfull \hbox (3.9776pt too wide) in paragraph at lines 89--89
 []\T1/phv/m/sl/10 type[] 
  []
 
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 11 on input line 89.
-
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 12 on input line 104.
-
-) (classprogram_1_1vector.tex [15]
-Underfull \hbox (badness 10000) detected at line 35
-[][][]
- []
-
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 13 on input line 42.
-
+[15]) (classprogram_1_1vector.tex
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 12.22644pt.
@@ -1378,11 +1334,14 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [16]
+Underfull \hbox (badness 10000) detected at line 35
+[][][]
+ []
 
-Package longtable Warning: Column widths have changed
-(longtable)                in table 14 on input line 60.
 
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
+ [17]
 Underfull \hbox (badness 10000) detected at line 84
 [][][]
  []
@@ -1392,57 +1351,46 @@ Underfull \hbox (badness 10000) detected at line 102
 [][][]
  []
 
-[17]
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 16 on input line 119.
-
-
-Underfull \hbox (badness 10000) detected at line 120
-[][][]
- []
-
-) (program_8py.tex
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 12.22644pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[18]) [19] [20
+[18]
+Underfull \hbox (badness 10000) detected at line 120
+[][][]
+ []
 
-]
+) (program_8py.tex [19])
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 12.22644pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[20]
 No file refman.ind.
-
-Package longtable Warning: Table widths have changed. Rerun LaTeX.
-
-(refman.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+(refman.aux) ) 
 Here is how much of TeX's memory you used:
- 8463 strings out of 493334
- 120853 string characters out of 3139237
- 206599 words of memory out of 3000000
- 11716 multiletter control sequences out of 15000+200000
+ 8462 strings out of 493334
+ 120484 string characters out of 3139237
+ 206936 words of memory out of 3000000
+ 11715 multiletter control sequences out of 15000+200000
  57392 words of font info for 84 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 53i,16n,92p,1025b,572s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Program Files/Mi
-KTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvi
-ps/fontname/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plmi7.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy7.pfb><C:/Program Files
-/MiKTeX 2.9/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/co
-urier/ucrro8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8ac.pfb><C:/Progr
-am Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (21 pages, 118336 bytes).
+ 53i,16n,92p,1025b,548s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/pl/plmi.enc}{C:/Prog
+ram Files/MiKTeX 2.9/fonts/enc/dvips/pl/plms.enc}{C:/Program Files/MiKTeX 2.9/f
+onts/enc/dvips/fontname/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+pl/plmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/pl/plsy7.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/urw/courier/ucrb8a.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/
+type1/urw/courier/ucrro8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helv
+etic/uhvb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8ac.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (21 pages, 119056 bytes).
 PDF statistics:
  109 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
