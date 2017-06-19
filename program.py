@@ -1,6 +1,5 @@
 import re
 import math
-import sys
 ## \brief Wektory w układzie kartezjańskim
 # \author Bernadeta Nowosielska
 # \param x,y,z wspołrzędne w układzie karteziańskim
@@ -413,7 +412,20 @@ def dihedral_angle(b1, b2, b3):
     x=((b1.vector_prod(b2)).vector_prod(b2.vector_prod(b3))).scalar_prod(b2)/b2.leng()
     y=(b1.vector_prod(b2)).scalar_prod(b2.vector_prod(b3))
     return math.atan2(x,y)
-def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
+## \brief Szuka atomow i wiązań istotnych dla tworzenia wiązania
+# \param table tablica z danymi wczytanymi z pliku cif
+# \return obiekty klady monomer 
+"""obiekt jest tworzony jesli monomer zawiera 8 atomow o zdefiniowanych wspołrzędnych i następujących nazwach:
+'CA' - węgiel alfa
+'C' - węgiel karboksylowy 
+O zawarte w nazwie, atom połączony wiązaniem pojedynczym z 'C' - tlen hydroksylowy grupy kaboksylowej
+H zawarte w nazwie, atom połączony wiązaniem pojedynczym z tlenem hydroksylowym gupy karboksylowej - wodor hydroksylowy grupy karboksylowej
+atom połączony wiązaniem podwojnym z węglem karboksylowym - tlen karbonylowy grupy karboksylowej
+N zawarte w nazwie, atom połaczony z 'CA' - azot grupy aminowej
+H w nazwie, atom połączony z azotem grupy aminowej - wodor grupy aminowej (dwa atomy)
+""" 
+# \author Barbara Gruza
+def upload_data(table):
     atoms_param=[]  #parametry kolejnych atomow
     no_at=0  #number of atoms
     ID="?"
@@ -448,14 +460,12 @@ def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
                
     for w2 in range (0, len(bonds)):
        if ((bonds[w2][0]=="C" and ("O" in bonds[w2][1])) or (bonds[w2][1]=="C" and  ("O" in bonds[w2][0]))) and bonds[w2][2]=="SING":
-#           print (bonds[w2], ID)  # wiązanie C-Oh
            if ("O" in bonds[w2][0]): tlen=bonds[w2][0]
            else: tlen=bonds[w2][1] 
            if ("C" in bonds[w2][0]): wegiel=bonds[w2][0]
            else: wegiel=bonds[w2][1]
            for w3 in range (0, len(bonds)):
                if (("H" in bonds[w3][0]) or "H" in bonds[w3][1]) and (bonds[w3][0]==tlen or bonds[w3][1]==tlen) and (("O" in bonds[w3][0]) or ("O" in bonds[w3][1])):
-                   #print (bonds[w3], ID)
                    if ("H" in bonds[w3][0]): wodor=bonds[w3][0]
                    else: wodor=bonds[w3][1]
                if (bonds[w3][2]=="DOUB" and (bonds[w3][0]==wegiel or bonds[w3][1]==wegiel)):
@@ -473,64 +483,52 @@ def upload_data(table, l1, l2, l3, l4, l5, l7, l8):
        if atoms_param[w4].ID==wodor:
           atoms_param[w4].znacznik="H"
           wazne_atomy.append(atoms_param[w4])
-#          print (ID, atoms_param[w4])           
-          l1.append(1)
        if atoms_param[w4].ID==tlen:                         
           atoms_param[w4].znacznik="O_OH"
           wazne_atomy.append(atoms_param[w4])
-#          print (ID, atoms_param[w4])          
-          l2.append(1)
        if atoms_param[w4].ID==wegiel:
           wazne_atomy.append(atoms_param[w4]) 
-#          print (ID, atoms_param[w4])
-          l3.append(1)
        if atoms_param[w4].ID==tlen_doub:
           atoms_param[w4].znacznik="O="                           
           wazne_atomy.append(atoms_param[w4])
-#          print (ID, atoms_param[w4])
-          l4.append(1)
        if atoms_param[w4].ID=="CA":
           atoms_param[w4].znacznik="C_a"
           wazne_atomy.append(atoms_param[w4])
-#          print (ID, atoms_param[w4])
-          l5.append(1)
     if len(wazne_atomy)!=5: ID="?"
     for w4 in range (0, len(atoms_param)):
        if atoms_param[w4].ID==azot:
           atoms_param[w4].znacznik="N"
           wazne_atomy.append(atoms_param[w4])
-#          print (ID, atoms_param[w4])
-          l7.append(1)
        for w6 in range(0,len(amino_hydrogen)):
            if atoms_param[w4].ID==amino_hydrogen[w6]:
                atoms_param[w4].znacznik="nH"
                wazne_atomy.append(atoms_param[w4])
-#               print (ID, atoms_param[w4])
-               l8.append(1)
-#    print(len(wazne_atomy))
-#    print (len(l1), len(l2), len(l3), len(l4), len(l5), len(l7), len(l8))
     if len(wazne_atomy)!=8: ID="?"
     return  monomer(ID, no_at, atoms_param, no_bonds , bonds, wazne_atomy)
-
+## \brief Tworzy plik w formacie pdb
+# \param peptyd obiekt klasy peptyd - gotowy produkt łączenia aminokwasow
+# \param i ilosć aminokwasow w peptydzie
+# \param j ilosć atomow w kolejnych aminokwasach
+# \param n numery porządkowe kolejnych aminokwasow
+# \author Barbara Gruza
 def make_output(peptyd, i, j, n):
     string=""
     string+=('%5s %5d %-7s %-7s %8.3f %8.3f %8.3f %3s' %("ATOM ", n, peptyd.coord[i][2][j-1].ID, peptyd.coord[i][0], peptyd.coord[i][2][j-1].x, peptyd.coord[i][2][j-1].y, peptyd.coord[i][2][j-1].z, peptyd.coord[i][2][j-1].element))
     string+='\n'
     f.write(string)
 
+## /brief Tworzy monomery białkowe
+""" Program wczytuje dane z pliku Components-pub.cif do tablicy 'table'.
+Wybiera L-peptydy (oraz glicynę).
+Korzystając z funkcji 'upload_data' tworzy listę obiektow klasy monomer.
+Jesli monomer nie zawiera poprawnie zdefiniowanych nazw oraz wspołrzędnych atomow grup aminowej, karboksylowej oraz węgla alfa nie zostanie załadowany do tablicy 
+"""
+# /author Barbara Gruza
 file=open('Components-pub.cif')
 i=0
 table =[]
 number_of_lines=0
 monomers_list={}
-l1=[]
-l2=[]
-l3=[]
-l4=[]
-l5=[]
-l6=0
-l7=[]
-l8=[]
 for line in file:  
     i+=1
     if i>21362: break
@@ -547,39 +545,45 @@ for line in file:
         if table[j][0]=="_chem_comp.type":
             if table[j][1][1:10]=="L-peptide" or table[j][1][1:10]=="L-PEPTIDE" or ("GLY" in table[j-2]):
     # making monomer
-               monomer_i=upload_data(table, l1, l2, l3, l4, l5, l7, l8)
+               monomer_i=upload_data(table)
                if monomer_i.ID!="?":
-                   monomers_list[monomer_i.ID]=monomer_i
-                   l6+=1
-#                   print (l6)
-                   
+                   monomers_list[monomer_i.ID]=monomer_i                   
     table =[]
     number_of_lines=0
-#for key in monomers_list:
-#    print(key)
-#    monomers_list[key].system_N()
-#print(len(monomers_list))
 
-data=open(sys.argv[1])
+## /brief Tworzy poptyd o zadanych kątach omega, fi, psi
+""" Program wczytuje dane z pliku data.txt.
+W pliku wejciowym w pierwszej kolumnie musi znajdować się trzyliterowy kod monomeru.
+W kolejnych trzech kolumnach mogą znajdować się wartosci kątow omega, fi, psi (w takiej kolejnosci) podane w stopniach.
+Jesli liczba kolumn w pliku jest rożna od 4 (plik nie zawiera dokladnie trzech wartosci kątow), zostają automatycznie ustalone następujące wartosci:
+omega=180 
+fi=(-60)
+psi=(-45)
+"""
+# /author Barbara Gruza
+data=open('data.txt')
 words2=""
 table2=[]
 for line in data:
     words2=re.split("\s+",line.strip())
+    if len(words2)!=4:
+        words2.append(180)
+        words2.append(-60)
+        words2.append(-45)
     table2.append(words2)
-
 
 aa=peptide()
 aa.start(monomers_list[table2[0][0]])
 for w9 in range (0, (len(table2)-1)):
-#    print (w9)
-    aa.add(monomers_list[table2[w9+1][0]],math.pi,  float(table2[w9+1][1]), float(table2[w9+1][2]))
-#print(aa)
+    aa.add(monomers_list[table2[w9+1][0]], (float(table2[w9+1][1]))*math.pi/180,  (float(table2[w9+1][2]))*math.pi/180, (float(table2[w9+1][3])*math.pi/180))
 
+## /brief Drukuje stworzony peptyd do pliku output.pdb
+""" Korzystając z funkcji make_output tworzy plik zawierający stworzony obiekt klasy poptyd w formacie .pdb
+"""
+# /author Barbara Gruza
 f=open('output.pdb', 'w')
-i=0
-j=0
 n=0
 for w7 in range (len(aa.coord)):
     for w8 in range (len(aa.coord[w7][2])):
-        n+=1
+        n+=1    
         make_output(aa, w7, w8, n)
