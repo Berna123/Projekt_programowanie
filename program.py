@@ -142,7 +142,7 @@ class monomer:
         for i in range (__self__.number_of_bonds):
             new_bonds.append(__self__.bonds[i])
         return monomer(__self__.ID,__self__.number_of_atoms, new_atoms, __self__.number_of_bonds, new_bonds, __self__.wazne_atomy)
-    ## \brief Obrót wszystkich atomu monomeru
+    ## \brief Obrót wszystkich atomów monomeru
     # \param m macierz obrotu
     def rotate_all(__self__,m):
         for i in range(__self__.number_of_atoms):
@@ -417,16 +417,16 @@ def dihedral_angle(b1, b2, b3):
 ## \brief Szuka atomow i wiązań istotnych dla tworzenia wiązania
 # \param table tablica z danymi wczytanymi z pliku cif
 # \return obiekty klady monomer 
-"""obiekt jest tworzony jesli monomer zawiera 8 atomow o zdefiniowanych wspołrzędnych i następujących nazwach:
-'CA' - węgiel alfa
-'C' - węgiel karboksylowy 
-O zawarte w nazwie, atom połączony wiązaniem pojedynczym z 'C' - tlen hydroksylowy grupy kaboksylowej
-H zawarte w nazwie, atom połączony wiązaniem pojedynczym z tlenem hydroksylowym gupy karboksylowej - wodor hydroksylowy grupy karboksylowej
-atom połączony wiązaniem podwojnym z węglem karboksylowym - tlen karbonylowy grupy karboksylowej
-N zawarte w nazwie, atom połaczony z 'CA' - azot grupy aminowej
-H w nazwie, atom połączony z azotem grupy aminowej - wodor grupy aminowej (dwa atomy)
-""" 
 # \author Barbara Gruza
+#
+#obiekt jest tworzony jesli monomer zawiera 8 atomow o zdefiniowanych wspołrzędnych i następujących nazwach:
+#'CA' - węgiel alfa
+#'C' - węgiel karboksylowy 
+#O zawarte w nazwie, atom połączony wiązaniem pojedynczym z 'C' - tlen hydroksylowy grupy kaboksylowej
+#H zawarte w nazwie, atom połączony wiązaniem pojedynczym z tlenem hydroksylowym gupy karboksylowej - wodor hydroksylowy grupy karboksylowej
+#atom połączony wiązaniem podwojnym z węglem karboksylowym - tlen karbonylowy grupy karboksylowej
+#N zawarte w nazwie, atom połaczony z 'CA' - azot grupy aminowej
+#H w nazwie, atom połączony z azotem grupy aminowej - wodor grupy aminowej (dwa atomy)
 def upload_data(table):
     atoms_param=[]  #parametry kolejnych atomow
     no_at=0  #number of atoms
@@ -533,9 +533,6 @@ number_of_lines=0
 monomers_list={}
 for line in file:  
     i+=1
-    if i>21362: break
-#    if i>8355: break
-#    if i>3785: break
     words=re.split("\s+",line.strip())
     table.append(words)
     number_of_lines+=1
@@ -562,7 +559,7 @@ for line in file:
 #fi=(-60)
 #psi=(-45)
 # /author Barbara Gruza
-data=open('data.txt')
+data=open(sys.argv[1])
 words2=""
 table2=[]
 for line in data:

@@ -45,6 +45,8 @@ string \textbf{ words2} = \char`\"{}\char`\"{}
 \item 
 list \textbf{ table2} = [$\,$]
 \item 
+list \textbf{ table3} = [$\,$]
+\item 
 \textbf{ aa} = \textbf{ peptide}()
 \item 
 \textbf{ f} = open(\textquotesingle{}output.\+pdb\textquotesingle{}, \textquotesingle{}w\textquotesingle{})
@@ -138,7 +140,10 @@ Szuka atomow i wiązań istotnych dla tworzenia wiązania.
 \begin{DoxyReturn}{Zwraca}
 obiekty klady monomer 
 \end{DoxyReturn}
-
+\begin{DoxyAuthor}{Autor}
+Barbara Gruza
+\end{DoxyAuthor}
+obiekt jest tworzony jesli monomer zawiera 8 atomow o zdefiniowanych wspołrzędnych i następujących nazwach\+: \textquotesingle{}CA\textquotesingle{} -\/ węgiel alfa \textquotesingle{}C\textquotesingle{} -\/ węgiel karboksylowy O zawarte w nazwie, atom połączony wiązaniem pojedynczym z \textquotesingle{}C\textquotesingle{} -\/ tlen hydroksylowy grupy kaboksylowej H zawarte w nazwie, atom połączony wiązaniem pojedynczym z tlenem hydroksylowym gupy karboksylowej -\/ wodor hydroksylowy grupy karboksylowej atom połączony wiązaniem podwojnym z węglem karboksylowym -\/ tlen karbonylowy grupy karboksylowej N zawarte w nazwie, atom połaczony z \textquotesingle{}CA\textquotesingle{} -\/ azot grupy aminowej H w nazwie, atom połączony z azotem grupy aminowej -\/ wodor grupy aminowej (dwa atomy) 
 
 \subsubsection{Dokumentacja zmiennych}
 \mbox{\label{namespaceprogram_aaac913534cc4f0ac2d38962f6f53f81c}} 
@@ -218,6 +223,12 @@ Program wczytuje dane z pliku Components-\/pub.\+cif do tablicy \textquotesingle
 \index{table2@{table2}!program@{program}}
 \paragraph{table2}
 {\footnotesize\ttfamily list program.\+table2 = [$\,$]}
+
+\mbox{\label{namespaceprogram_a59b6740b6dbcde74fa2c7216ddac9520}} 
+\index{program@{program}!table3@{table3}}
+\index{table3@{table3}!program@{program}}
+\paragraph{table3}
+{\footnotesize\ttfamily list program.\+table3 = [$\,$]}
 
 \mbox{\label{namespaceprogram_ae7ae5900685c39ab4a7b31b6768880a1}} 
 \index{program@{program}!words@{words}}
