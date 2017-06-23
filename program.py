@@ -562,17 +562,19 @@ for line in file:
 #fi=(-60)
 #psi=(-45)
 # /author Barbara Gruza
-data=open(sys.argv[1])
+data=open('data.txt')
 words2=""
 table2=[]
 for line in data:
+    table3=[]
     words2=re.split("\s+",line.strip())
-    if len(words2)!=4:
-        words2.append(180)
-        words2.append(-60)
-        words2.append(-45)
-    table2.append(words2)
-
+    if len(words2)==4: table2.append(words2)
+    else:
+        table3.append(words2[0])
+        table3.append(180)
+        table3.append(-60)
+        table3.append(-45)
+        table2.append(table3)
 aa=peptide()
 aa.start(monomers_list[table2[0][0]])
 for w9 in range (0, (len(table2)-1)):
